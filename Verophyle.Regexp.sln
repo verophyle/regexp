@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Verophyle.Regexp", "Regexp\Regexp.csproj", "{AA43D0F6-AFC3-4ED4-844B-DE47E11E36FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regexp.Tests", "Regexp.Tests\Regexp.Tests.csproj", "{2CB72D9D-DC84-41F5-8D66-3A34925A5748}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA43D0F6-AFC3-4ED4-844B-DE47E11E36FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA43D0F6-AFC3-4ED4-844B-DE47E11E36FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA43D0F6-AFC3-4ED4-844B-DE47E11E36FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA43D0F6-AFC3-4ED4-844B-DE47E11E36FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CB72D9D-DC84-41F5-8D66-3A34925A5748}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CB72D9D-DC84-41F5-8D66-3A34925A5748}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CB72D9D-DC84-41F5-8D66-3A34925A5748}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CB72D9D-DC84-41F5-8D66-3A34925A5748}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

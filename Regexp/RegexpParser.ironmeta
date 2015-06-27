@@ -1,0 +1,61 @@
+// Parser for simple string regular expressions.
+
+ironmeta RegexpParser<char, Regexp<InputClass<char>>>
+{
+	Regex = OrElement:e EOF                       -> { new Node.Cat<InputClass<char>>(e, new Node.End<InputClass<char>>(ref NEXT_POS)) };
+
+	OrElement = OrElement:a "|" AndElement:b      -> { new Node.Or<InputClass<char>>(a, b) };
+	OrElement = AndElement;
+
+	AndElement = AndElement:a PostElement:b       -> { new Node.Cat<InputClass<char>>(a, b) };
+	AndElement = PostElement;
+
+	PostElement = Element:a '+'                   -> { new Node.Cat<InputClass<char>>(a, new Node.Star<InputClass<char>>(a)) };
+	PostElement = Element:a '*'                   -> { new Node.Star<InputClass<char>>(a) };
+	PostElement = Element:a '?'                   -> { new Node.Or<InputClass<char>>(a, new Node.Epsilon<InputClass<char>>(ref NEXT_POS)) };
+	PostElement = Element;
+
+	Element = Group | Class | Dot | Single;
+
+	Group = '(' OrElement ')';
+	Class = '[' '^'?:n (~']' Single)+:c ']'       -> { 
+	                                                     var input_class = new CategoryClass(c.Results.Select(l => l.Input));
+													     if (n.Inputs.Any())
+														     return new Node.Fail<InputClass<char>>(input_class, ref NEXT_POS);
+                                                         else
+                                                             return new Node.Leaf<InputClass<char>>(input_class, ref NEXT_POS);
+	                                                 };
+
+	Dot = '.'                                        -> { new Node.Dot<InputClass<char>>(ref NEXT_POS) };
+
+	Single = Category | Escaped | Ch;
+
+	Category = MetaCategory | UniCategory;
+
+	MetaCategory = '\\' ('s' | 'w' | 'd'):cat                         -> { new Node.Leaf<InputClass<char>>(new CategoryClass(cat.Inputs), ref NEXT_POS) };
+	UniCategory = "\\p{" UnicodeGeneralCategory:cat '}'               -> { new Node.Leaf<InputClass<char>>(new CategoryClass(cat.Inputs), ref NEXT_POS) };
+	
+	Escaped = '\\' EscapedChar                                        -> { new Node.Leaf<InputClass<char>>(new CharClass(Unescape(_IM_Result.Inputs)), ref NEXT_POS) };
+	Escaped = (   "\\u" (HexDigit HexDigit HexDigit HexDigit):hex
+                | "\\x" (HexDigit HexDigit? HexDigit? HexDigit?):hex
+                | "\\U" (HexDigit HexDigit HexDigit HexDigit
+			             HexDigit HexDigit HexDigit HexDigit):hex )   -> { new Node.Leaf<InputClass<char>>(new CharClass(UnHex(hex.Inputs)), ref NEXT_POS) };
+    Escaped = '\\' .:c                                                -> { new Node.Leaf<InputClass<char>>(new CharClass(c.Inputs.First()), ref NEXT_POS) };
+
+	Ch = ~SyntaxChar .:c                                              -> { new Node.Leaf<InputClass<char>>(new CharClass(c.Inputs.First()), ref NEXT_POS) };
+
+	EscapedChar = ['\'' '"' '\\' '0' 'a' 'b' 'f' 'n' 'r' 't' 'v'];
+	SyntaxChar = ['|' '(' ')' '[' ']' '\\' '+' '*'];
+	HexDigit = ['0'-'9' 'a'-'f' 'A'-'F'];
+
+	UnicodeGeneralCategory = "Lu" | "Ll" | "Lt" | "Lm" | "Lo";
+	UnicodeGeneralCategory = "Mn" | "Mc" | "Me";
+	UnicodeGeneralCategory = "Nd" | "Nl" | "No";
+	UnicodeGeneralCategory = "Zs" | "Zl" | "Zp";
+	UnicodeGeneralCategory = "Cc" | "Cf" | "Cs" | "Co";
+	UnicodeGeneralCategory = "Pc" | "Pd" | "Ps" | "Pe" | "Pi" | "Pf" | "Po";
+	UnicodeGeneralCategory = "Sm" | "Sc" | "Sk" | "So";
+	UnicodeGeneralCategory = "Cn";
+
+	EOF = ~.;
+}
