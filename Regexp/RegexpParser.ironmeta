@@ -1,5 +1,6 @@
-// Parser for simple string regular expressions.
+// Verophyle.Regexp Copyright © Verophyle Informatics 2015
 
+// Parser for simple string regular expressions.
 ironmeta RegexpParser<char, Regexp<InputClass<char>>>
 {
 	Regex = OrElement:e EOF                       -> { new Node.Cat<InputClass<char>>(e, new Node.End<InputClass<char>>(ref NEXT_POS)) };
