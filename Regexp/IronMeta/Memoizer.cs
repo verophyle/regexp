@@ -9,7 +9,7 @@ namespace IronMeta.Utils
     /// An enumerable that memoizes its input.
     /// </summary>
     /// <typeparam name="T">Element type.</typeparam>
-    public class Memoizer<T> : IList<T>
+    class Memoizer<T> : IList<T>
     {
         IList<T> memoList = new List<T>();
         readonly IEnumerator<T> innerEnumerator;

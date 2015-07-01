@@ -13,7 +13,7 @@ namespace IronMeta.Matcher
     /// </summary>
     /// <typeparam name="TInput">The type of inputs to the grammar.</typeparam>
     /// <typeparam name="TResult">The type of results of grammar rules.</typeparam>
-    public abstract class Matcher<TInput, TResult>
+    abstract class Matcher<TInput, TResult>
     {
         #region Members
 
@@ -799,7 +799,7 @@ namespace IronMeta.Matcher
     /// <summary>
     /// Extension class to determine if a type is anonymous; cribbed from http://stackoverflow.com/questions/1650681/determining-whether-a-type-is-an-anonymous-type
     /// </summary>
-    public static class TypeExtension
+    static class TypeExtension
     {
 
         /// <summary>

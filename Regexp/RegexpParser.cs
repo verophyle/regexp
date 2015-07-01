@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Verophyle.Regexp
 {
-    public partial class RegexpParser
+    partial class RegexpParser
     {
         int NEXT_POS = 0;
 

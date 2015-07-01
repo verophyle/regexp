@@ -13,7 +13,7 @@ namespace IronMeta.Utils
     /// copy is taken of the original data and the copy modified instead of the original.
     /// </summary>
     /// <typeparam name="T">The enumerable's data type.</typeparam>
-    public class Slice<T> : IList<T>
+    class Slice<T> : IList<T>
     {
         IEnumerable<T> enumerable;
         IList<T> list;

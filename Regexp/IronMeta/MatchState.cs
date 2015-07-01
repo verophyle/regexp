@@ -15,7 +15,7 @@ namespace IronMeta.Matcher
     /// </summary>
     /// <typeparam name="TInput">The input type.</typeparam>
     /// <typeparam name="TResult">The result type.</typeparam>
-    public class MatchState<TInput, TResult>
+    class MatchState<TInput, TResult>
     {
         IDictionary<string, object> properties = new Dictionary<string, object>();
 
@@ -411,7 +411,7 @@ namespace IronMeta.Matcher
     /// <summary>
     /// Records the production name and current expansion for left-recursion handling.
     /// </summary>
-    public struct Expansion
+    struct Expansion
     {
         /// <summary>
         /// The name of the production.
@@ -427,7 +427,7 @@ namespace IronMeta.Matcher
     /// <summary>
     /// A record of the current state of left-recursion handling for a rule.
     /// </summary>
-    public class LRRecord<TItem>
+    class LRRecord<TItem>
     {
         /// <summary>
         /// Whether or not left-recursion has been detected for this production.
@@ -464,7 +464,7 @@ namespace IronMeta.Matcher
     /// <summary>
     /// Stores information about errors.
     /// </summary>
-    public class ErrorRec
+    class ErrorRec
     {
         string _msg = null;
         Func<string> _func = null;

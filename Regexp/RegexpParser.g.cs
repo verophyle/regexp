@@ -22,7 +22,7 @@ namespace Verophyle.Regexp
     using _RegexpParser_Rule = System.Action<IronMeta.Matcher.MatchState<char, Regexp<InputClass<char>>>, int, IEnumerable<IronMeta.Matcher.MatchItem<char, Regexp<InputClass<char>>>>>;
     using _RegexpParser_Base = IronMeta.Matcher.Matcher<char, Regexp<InputClass<char>>>;
 
-    public partial class RegexpParser : IronMeta.Matcher.Matcher<char, Regexp<InputClass<char>>>
+    partial class RegexpParser : IronMeta.Matcher.Matcher<char, Regexp<InputClass<char>>>
     {
         public RegexpParser()
             : base()

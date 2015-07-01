@@ -13,7 +13,7 @@ namespace IronMeta.Matcher
     ///  - As the result of a production, stores a range of input, and the results of the match.
     ///  - As a parameter to a production, can hold an item of input, a range of input, or a production.
     /// </summary>
-    public class MatchItem<TInput, TResult>
+    class MatchItem<TInput, TResult>
     {
         static readonly IEnumerable<TInput> emptyInputs = Enumerable.Empty<TInput>();
         static readonly IEnumerable<TResult> emptyResults = Enumerable.Empty<TResult>();

@@ -8,7 +8,7 @@ namespace IronMeta.Matcher
     /// <summary>
     /// Holds the results of trying to parse an input stream.
     /// </summary>
-    public class MatchResult<TInput, TResult>
+    class MatchResult<TInput, TResult>
     {
         Matcher<TInput, TResult> matcher = null;
         MatchState<TInput, TResult> state = null;
