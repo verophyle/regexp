@@ -1,5 +1,5 @@
 //
-// IronMeta RegexpParser Parser; Generated 2015-06-27 05:35:15Z UTC
+// IronMeta RegexpParser Parser; Generated 2015-07-25 14:37:42Z UTC
 //
 
 using System;
@@ -16,7 +16,7 @@ namespace Verophyle.Regexp
 
     using _RegexpParser_Inputs = IEnumerable<char>;
     using _RegexpParser_Results = IEnumerable<Regexp<InputClass<char>>>;
-    using __Item = IronMeta.Matcher.MatchItem<char, Regexp<InputClass<char>>>;
+    using _RegexpParser_Item = IronMeta.Matcher.MatchItem<char, Regexp<InputClass<char>>>;
     using _RegexpParser_Args = IEnumerable<IronMeta.Matcher.MatchItem<char, Regexp<InputClass<char>>>>;
     using _RegexpParser_Memo = IronMeta.Matcher.MatchState<char, Regexp<InputClass<char>>>;
     using _RegexpParser_Rule = System.Action<IronMeta.Matcher.MatchState<char, Regexp<InputClass<char>>>, int, IEnumerable<IronMeta.Matcher.MatchItem<char, Regexp<InputClass<char>>>>>;
@@ -49,6 +49,7 @@ namespace Verophyle.Regexp
                 "EscapedChar",
                 "HexDigit",
                 "MetaCategory",
+                "Range",
                 "Single",
                 "SyntaxChar",
                 "UniCategory",
@@ -60,13 +61,13 @@ namespace Verophyle.Regexp
         public void Regex(_RegexpParser_Memo _memo, int _index, _RegexpParser_Args _args)
         {
 
-            __Item e = null;
+            _RegexpParser_Item e = null;
 
             // AND 1
             int _start_i1 = _index;
 
             // CALLORVAR OrElement
-            __Item _r3;
+            _RegexpParser_Item _r3;
 
             _r3 = _MemoCall(_memo, "OrElement", _index, OrElement, null);
 
@@ -79,7 +80,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Push(null); goto label1; }
 
             // CALLORVAR EOF
-            __Item _r4;
+            _RegexpParser_Item _r4;
 
             _r4 = _MemoCall(_memo, "EOF", _index, EOF, null);
 
@@ -91,7 +92,7 @@ namespace Verophyle.Regexp
 
             if (_r1_1 != null && _r1_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i1, _index, _memo.InputEnumerable, _r1_1.Results.Concat(_r1_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i1, _index, _memo.InputEnumerable, _r1_1.Results.Concat(_r1_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -104,7 +105,7 @@ namespace Verophyle.Regexp
             if (_r0 != null)
             {
                 _memo.Results.Pop();
-                _memo.Results.Push( new __Item(_r0.StartIndex, _r0.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Cat<InputClass<char>>(e, new Node.End<InputClass<char>>(ref NEXT_POS)); }, _r0), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_r0.StartIndex, _r0.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Cat<InputClass<char>>(e, new Node.End<InputClass<char>>(ref NEXT_POS)); }, _r0), true) );
             }
 
         }
@@ -113,8 +114,8 @@ namespace Verophyle.Regexp
         public void OrElement(_RegexpParser_Memo _memo, int _index, _RegexpParser_Args _args)
         {
 
-            __Item a = null;
-            __Item b = null;
+            _RegexpParser_Item a = null;
+            _RegexpParser_Item b = null;
 
             // OR 0
             int _start_i0 = _index;
@@ -126,7 +127,7 @@ namespace Verophyle.Regexp
             int _start_i3 = _index;
 
             // CALLORVAR OrElement
-            __Item _r5;
+            _RegexpParser_Item _r5;
 
             _r5 = _MemoCall(_memo, "OrElement", _index, OrElement, null);
 
@@ -147,7 +148,7 @@ namespace Verophyle.Regexp
 
             if (_r3_1 != null && _r3_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i3, _index, _memo.InputEnumerable, _r3_1.Results.Concat(_r3_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i3, _index, _memo.InputEnumerable, _r3_1.Results.Concat(_r3_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -159,7 +160,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Push(null); goto label2; }
 
             // CALLORVAR AndElement
-            __Item _r8;
+            _RegexpParser_Item _r8;
 
             _r8 = _MemoCall(_memo, "AndElement", _index, AndElement, null);
 
@@ -174,7 +175,7 @@ namespace Verophyle.Regexp
 
             if (_r2_1 != null && _r2_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i2, _index, _memo.InputEnumerable, _r2_1.Results.Concat(_r2_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i2, _index, _memo.InputEnumerable, _r2_1.Results.Concat(_r2_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -187,14 +188,14 @@ namespace Verophyle.Regexp
             if (_r1 != null)
             {
                 _memo.Results.Pop();
-                _memo.Results.Push( new __Item(_r1.StartIndex, _r1.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Or<InputClass<char>>(a, b); }, _r1), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_r1.StartIndex, _r1.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Or<InputClass<char>>(a, b); }, _r1), true) );
             }
 
             // OR shortcut
             if (_memo.Results.Peek() == null) { _memo.Results.Pop(); _index = _start_i0; } else goto label0;
 
             // CALLORVAR AndElement
-            __Item _r9;
+            _RegexpParser_Item _r9;
 
             _r9 = _MemoCall(_memo, "AndElement", _index, AndElement, null);
 
@@ -209,8 +210,8 @@ namespace Verophyle.Regexp
         public void AndElement(_RegexpParser_Memo _memo, int _index, _RegexpParser_Args _args)
         {
 
-            __Item a = null;
-            __Item b = null;
+            _RegexpParser_Item a = null;
+            _RegexpParser_Item b = null;
 
             // OR 0
             int _start_i0 = _index;
@@ -219,7 +220,7 @@ namespace Verophyle.Regexp
             int _start_i2 = _index;
 
             // CALLORVAR AndElement
-            __Item _r4;
+            _RegexpParser_Item _r4;
 
             _r4 = _MemoCall(_memo, "AndElement", _index, AndElement, null);
 
@@ -232,7 +233,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Push(null); goto label2; }
 
             // CALLORVAR PostElement
-            __Item _r6;
+            _RegexpParser_Item _r6;
 
             _r6 = _MemoCall(_memo, "PostElement", _index, PostElement, null);
 
@@ -247,7 +248,7 @@ namespace Verophyle.Regexp
 
             if (_r2_1 != null && _r2_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i2, _index, _memo.InputEnumerable, _r2_1.Results.Concat(_r2_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i2, _index, _memo.InputEnumerable, _r2_1.Results.Concat(_r2_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -260,14 +261,14 @@ namespace Verophyle.Regexp
             if (_r1 != null)
             {
                 _memo.Results.Pop();
-                _memo.Results.Push( new __Item(_r1.StartIndex, _r1.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Cat<InputClass<char>>(a, b); }, _r1), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_r1.StartIndex, _r1.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Cat<InputClass<char>>(a, b); }, _r1), true) );
             }
 
             // OR shortcut
             if (_memo.Results.Peek() == null) { _memo.Results.Pop(); _index = _start_i0; } else goto label0;
 
             // CALLORVAR PostElement
-            __Item _r7;
+            _RegexpParser_Item _r7;
 
             _r7 = _MemoCall(_memo, "PostElement", _index, PostElement, null);
 
@@ -282,7 +283,7 @@ namespace Verophyle.Regexp
         public void PostElement(_RegexpParser_Memo _memo, int _index, _RegexpParser_Args _args)
         {
 
-            __Item a = null;
+            _RegexpParser_Item a = null;
 
             // OR 0
             int _start_i0 = _index;
@@ -297,7 +298,7 @@ namespace Verophyle.Regexp
             int _start_i4 = _index;
 
             // CALLORVAR Element
-            __Item _r6;
+            _RegexpParser_Item _r6;
 
             _r6 = _MemoCall(_memo, "Element", _index, Element, null);
 
@@ -318,7 +319,7 @@ namespace Verophyle.Regexp
 
             if (_r4_1 != null && _r4_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i4, _index, _memo.InputEnumerable, _r4_1.Results.Concat(_r4_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i4, _index, _memo.InputEnumerable, _r4_1.Results.Concat(_r4_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -331,7 +332,7 @@ namespace Verophyle.Regexp
             if (_r3 != null)
             {
                 _memo.Results.Pop();
-                _memo.Results.Push( new __Item(_r3.StartIndex, _r3.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Cat<InputClass<char>>(a, new Node.Star<InputClass<char>>(a)); }, _r3), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_r3.StartIndex, _r3.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Cat<InputClass<char>>(a, new Node.Star<InputClass<char>>(a)); }, _r3), true) );
             }
 
             // OR shortcut
@@ -341,7 +342,7 @@ namespace Verophyle.Regexp
             int _start_i9 = _index;
 
             // CALLORVAR Element
-            __Item _r11;
+            _RegexpParser_Item _r11;
 
             _r11 = _MemoCall(_memo, "Element", _index, Element, null);
 
@@ -362,7 +363,7 @@ namespace Verophyle.Regexp
 
             if (_r9_1 != null && _r9_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i9, _index, _memo.InputEnumerable, _r9_1.Results.Concat(_r9_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i9, _index, _memo.InputEnumerable, _r9_1.Results.Concat(_r9_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -375,7 +376,7 @@ namespace Verophyle.Regexp
             if (_r8 != null)
             {
                 _memo.Results.Pop();
-                _memo.Results.Push( new __Item(_r8.StartIndex, _r8.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Star<InputClass<char>>(a); }, _r8), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_r8.StartIndex, _r8.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Star<InputClass<char>>(a); }, _r8), true) );
             }
 
         label2: // OR
@@ -388,7 +389,7 @@ namespace Verophyle.Regexp
             int _start_i14 = _index;
 
             // CALLORVAR Element
-            __Item _r16;
+            _RegexpParser_Item _r16;
 
             _r16 = _MemoCall(_memo, "Element", _index, Element, null);
 
@@ -409,7 +410,7 @@ namespace Verophyle.Regexp
 
             if (_r14_1 != null && _r14_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i14, _index, _memo.InputEnumerable, _r14_1.Results.Concat(_r14_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i14, _index, _memo.InputEnumerable, _r14_1.Results.Concat(_r14_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -422,7 +423,7 @@ namespace Verophyle.Regexp
             if (_r13 != null)
             {
                 _memo.Results.Pop();
-                _memo.Results.Push( new __Item(_r13.StartIndex, _r13.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Or<InputClass<char>>(a, new Node.Epsilon<InputClass<char>>(ref NEXT_POS)); }, _r13), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_r13.StartIndex, _r13.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Or<InputClass<char>>(a, new Node.Epsilon<InputClass<char>>(ref NEXT_POS)); }, _r13), true) );
             }
 
         label1: // OR
@@ -432,7 +433,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Pop(); _index = _start_i0; } else goto label0;
 
             // CALLORVAR Element
-            __Item _r18;
+            _RegexpParser_Item _r18;
 
             _r18 = _MemoCall(_memo, "Element", _index, Element, null);
 
@@ -457,7 +458,7 @@ namespace Verophyle.Regexp
             int _start_i2 = _index;
 
             // CALLORVAR Group
-            __Item _r3;
+            _RegexpParser_Item _r3;
 
             _r3 = _MemoCall(_memo, "Group", _index, Group, null);
 
@@ -467,7 +468,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Pop(); _index = _start_i2; } else goto label2;
 
             // CALLORVAR Class
-            __Item _r4;
+            _RegexpParser_Item _r4;
 
             _r4 = _MemoCall(_memo, "Class", _index, Class, null);
 
@@ -480,7 +481,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Pop(); _index = _start_i1; } else goto label1;
 
             // CALLORVAR Dot
-            __Item _r5;
+            _RegexpParser_Item _r5;
 
             _r5 = _MemoCall(_memo, "Dot", _index, Dot, null);
 
@@ -493,7 +494,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Pop(); _index = _start_i0; } else goto label0;
 
             // CALLORVAR Single
-            __Item _r6;
+            _RegexpParser_Item _r6;
 
             _r6 = _MemoCall(_memo, "Single", _index, Single, null);
 
@@ -521,7 +522,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Push(null); goto label1; }
 
             // CALLORVAR OrElement
-            __Item _r3;
+            _RegexpParser_Item _r3;
 
             _r3 = _MemoCall(_memo, "OrElement", _index, OrElement, null);
 
@@ -533,7 +534,7 @@ namespace Verophyle.Regexp
 
             if (_r1_1 != null && _r1_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i1, _index, _memo.InputEnumerable, _r1_1.Results.Concat(_r1_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i1, _index, _memo.InputEnumerable, _r1_1.Results.Concat(_r1_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -553,7 +554,7 @@ namespace Verophyle.Regexp
 
             if (_r0_1 != null && _r0_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i0, _index, _memo.InputEnumerable, _r0_1.Results.Concat(_r0_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i0, _index, _memo.InputEnumerable, _r0_1.Results.Concat(_r0_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -567,8 +568,8 @@ namespace Verophyle.Regexp
         public void Class(_RegexpParser_Memo _memo, int _index, _RegexpParser_Args _args)
         {
 
-            __Item n = null;
-            __Item c = null;
+            _RegexpParser_Item n = null;
+            _RegexpParser_Item c = null;
 
             // AND 1
             int _start_i1 = _index;
@@ -589,7 +590,7 @@ namespace Verophyle.Regexp
             _ParseLiteralChar(_memo, ref _index, '^');
 
             // QUES
-            if (_memo.Results.Peek() == null) { _memo.Results.Pop(); _memo.Results.Push(new __Item(_index, _memo.InputEnumerable)); }
+            if (_memo.Results.Peek() == null) { _memo.Results.Pop(); _memo.Results.Push(new _RegexpParser_Item(_index, _memo.InputEnumerable)); }
 
             // BIND n
             n = _memo.Results.Peek();
@@ -600,7 +601,7 @@ namespace Verophyle.Regexp
 
             if (_r3_1 != null && _r3_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i3, _index, _memo.InputEnumerable, _r3_1.Results.Concat(_r3_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i3, _index, _memo.InputEnumerable, _r3_1.Results.Concat(_r3_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -627,18 +628,34 @@ namespace Verophyle.Regexp
 
             // NOT 11
             var _r11 = _memo.Results.Pop();
-            _memo.Results.Push( _r11 == null ? new __Item(_start_i11, _memo.InputEnumerable) : null);
+            _memo.Results.Push( _r11 == null ? new _RegexpParser_Item(_start_i11, _memo.InputEnumerable) : null);
             _index = _start_i11;
 
             // AND shortcut
             if (_memo.Results.Peek() == null) { _memo.Results.Push(null); goto label10; }
 
+            // OR 13
+            int _start_i13 = _index;
+
+            // CALLORVAR Range
+            _RegexpParser_Item _r14;
+
+            _r14 = _MemoCall(_memo, "Range", _index, Range, null);
+
+            if (_r14 != null) _index = _r14.NextIndex;
+
+            // OR shortcut
+            if (_memo.Results.Peek() == null) { _memo.Results.Pop(); _index = _start_i13; } else goto label13;
+
             // CALLORVAR Single
-            __Item _r13;
+            _RegexpParser_Item _r15;
 
-            _r13 = _MemoCall(_memo, "Single", _index, Single, null);
+            _r15 = _MemoCall(_memo, "Single", _index, Single, null);
 
-            if (_r13 != null) _index = _r13.NextIndex;
+            if (_r15 != null) _index = _r15.NextIndex;
+
+        label13: // OR
+            int _dummy_i13 = _index; // no-op for label
 
         label10: // AND
             var _r10_2 = _memo.Results.Pop();
@@ -646,7 +663,7 @@ namespace Verophyle.Regexp
 
             if (_r10_1 != null && _r10_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i10, _index, _memo.InputEnumerable, _r10_1.Results.Concat(_r10_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i10, _index, _memo.InputEnumerable, _r10_1.Results.Concat(_r10_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -664,7 +681,7 @@ namespace Verophyle.Regexp
             else
             {
                 if (_index > _start_i9)
-                    _memo.Results.Push(new __Item(_start_i9, _index, _memo.InputEnumerable, _res9.Where(_NON_NULL), true));
+                    _memo.Results.Push(new _RegexpParser_Item(_start_i9, _index, _memo.InputEnumerable, _res9.Where(_NON_NULL), true));
                 else
                     _memo.Results.Push(null);
             }
@@ -678,7 +695,7 @@ namespace Verophyle.Regexp
 
             if (_r2_1 != null && _r2_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i2, _index, _memo.InputEnumerable, _r2_1.Results.Concat(_r2_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i2, _index, _memo.InputEnumerable, _r2_1.Results.Concat(_r2_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -698,7 +715,7 @@ namespace Verophyle.Regexp
 
             if (_r1_1 != null && _r1_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i1, _index, _memo.InputEnumerable, _r1_1.Results.Concat(_r1_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i1, _index, _memo.InputEnumerable, _r1_1.Results.Concat(_r1_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -711,11 +728,11 @@ namespace Verophyle.Regexp
             if (_r0 != null)
             {
                 _memo.Results.Pop();
-                _memo.Results.Push( new __Item(_r0.StartIndex, _r0.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { var input_class = new CategoryClass(c.Results.Select(l => l.Input));
-                                                         if (n.Inputs.Any())
-                                                             return new Node.Fail<InputClass<char>>(input_class, ref NEXT_POS);
-                                                         else
-                                                             return new Node.Leaf<InputClass<char>>(input_class, ref NEXT_POS); }, _r0), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_r0.StartIndex, _r0.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { var input_class = new CategoryClass(c.Results.Select(l => l.Input));
+            if (n.Inputs.Any())
+                return new Node.Fail<InputClass<char>>(input_class, ref NEXT_POS);
+            else
+                return new Node.Leaf<InputClass<char>>(input_class, ref NEXT_POS); }, _r0), true) );
             }
 
         }
@@ -732,7 +749,93 @@ namespace Verophyle.Regexp
             if (_r0 != null)
             {
                 _memo.Results.Pop();
-                _memo.Results.Push( new __Item(_r0.StartIndex, _r0.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Dot<InputClass<char>>(ref NEXT_POS); }, _r0), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_r0.StartIndex, _r0.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Dot<InputClass<char>>(ref NEXT_POS); }, _r0), true) );
+            }
+
+        }
+
+
+        public void Range(_RegexpParser_Memo _memo, int _index, _RegexpParser_Args _args)
+        {
+
+            _RegexpParser_Item a = null;
+            _RegexpParser_Item b = null;
+
+            // AND 1
+            int _start_i1 = _index;
+
+            // AND 2
+            int _start_i2 = _index;
+
+            // CALLORVAR Single
+            _RegexpParser_Item _r4;
+
+            _r4 = _MemoCall(_memo, "Single", _index, Single, null);
+
+            if (_r4 != null) _index = _r4.NextIndex;
+
+            // BIND a
+            a = _memo.Results.Peek();
+
+            // AND shortcut
+            if (_memo.Results.Peek() == null) { _memo.Results.Push(null); goto label2; }
+
+            // LITERAL '-'
+            _ParseLiteralChar(_memo, ref _index, '-');
+
+        label2: // AND
+            var _r2_2 = _memo.Results.Pop();
+            var _r2_1 = _memo.Results.Pop();
+
+            if (_r2_1 != null && _r2_2 != null)
+            {
+                _memo.Results.Push( new _RegexpParser_Item(_start_i2, _index, _memo.InputEnumerable, _r2_1.Results.Concat(_r2_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _memo.Results.Push(null);
+                _index = _start_i2;
+            }
+
+            // AND shortcut
+            if (_memo.Results.Peek() == null) { _memo.Results.Push(null); goto label1; }
+
+            // CALLORVAR Single
+            _RegexpParser_Item _r7;
+
+            _r7 = _MemoCall(_memo, "Single", _index, Single, null);
+
+            if (_r7 != null) _index = _r7.NextIndex;
+
+            // BIND b
+            b = _memo.Results.Peek();
+
+        label1: // AND
+            var _r1_2 = _memo.Results.Pop();
+            var _r1_1 = _memo.Results.Pop();
+
+            if (_r1_1 != null && _r1_2 != null)
+            {
+                _memo.Results.Push( new _RegexpParser_Item(_start_i1, _index, _memo.InputEnumerable, _r1_1.Results.Concat(_r1_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _memo.Results.Push(null);
+                _index = _start_i1;
+            }
+
+            // ACT
+            var _r0 = _memo.Results.Peek();
+            if (_r0 != null)
+            {
+                _memo.Results.Pop();
+                _memo.Results.Push( new _RegexpParser_Item(_r0.StartIndex, _r0.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { var start = a.Results.Single().Input.Inputs.Single();
+            var end = b.Results.Single().Input.Inputs.Single();
+            var inputs = new List<char>();
+            for (char ch = start; ch <= end; ch++)
+                inputs.Add(ch);
+            var cc = new CharClass(inputs);
+            return new Node.Leaf<InputClass<char>>(cc, ref NEXT_POS); }, _r0), true) );
             }
 
         }
@@ -748,7 +851,7 @@ namespace Verophyle.Regexp
             int _start_i1 = _index;
 
             // CALLORVAR Category
-            __Item _r2;
+            _RegexpParser_Item _r2;
 
             _r2 = _MemoCall(_memo, "Category", _index, Category, null);
 
@@ -758,7 +861,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Pop(); _index = _start_i1; } else goto label1;
 
             // CALLORVAR Escaped
-            __Item _r3;
+            _RegexpParser_Item _r3;
 
             _r3 = _MemoCall(_memo, "Escaped", _index, Escaped, null);
 
@@ -771,7 +874,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Pop(); _index = _start_i0; } else goto label0;
 
             // CALLORVAR Ch
-            __Item _r4;
+            _RegexpParser_Item _r4;
 
             _r4 = _MemoCall(_memo, "Ch", _index, Ch, null);
 
@@ -790,7 +893,7 @@ namespace Verophyle.Regexp
             int _start_i0 = _index;
 
             // CALLORVAR MetaCategory
-            __Item _r1;
+            _RegexpParser_Item _r1;
 
             _r1 = _MemoCall(_memo, "MetaCategory", _index, MetaCategory, null);
 
@@ -800,7 +903,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Pop(); _index = _start_i0; } else goto label0;
 
             // CALLORVAR UniCategory
-            __Item _r2;
+            _RegexpParser_Item _r2;
 
             _r2 = _MemoCall(_memo, "UniCategory", _index, UniCategory, null);
 
@@ -815,7 +918,7 @@ namespace Verophyle.Regexp
         public void MetaCategory(_RegexpParser_Memo _memo, int _index, _RegexpParser_Args _args)
         {
 
-            __Item cat = null;
+            _RegexpParser_Item cat = null;
 
             // AND 1
             int _start_i1 = _index;
@@ -862,7 +965,7 @@ namespace Verophyle.Regexp
 
             if (_r1_1 != null && _r1_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i1, _index, _memo.InputEnumerable, _r1_1.Results.Concat(_r1_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i1, _index, _memo.InputEnumerable, _r1_1.Results.Concat(_r1_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -875,7 +978,7 @@ namespace Verophyle.Regexp
             if (_r0 != null)
             {
                 _memo.Results.Pop();
-                _memo.Results.Push( new __Item(_r0.StartIndex, _r0.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Leaf<InputClass<char>>(new CategoryClass(cat.Inputs), ref NEXT_POS); }, _r0), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_r0.StartIndex, _r0.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Leaf<InputClass<char>>(new CategoryClass(cat.Inputs), ref NEXT_POS); }, _r0), true) );
             }
 
         }
@@ -884,7 +987,7 @@ namespace Verophyle.Regexp
         public void UniCategory(_RegexpParser_Memo _memo, int _index, _RegexpParser_Args _args)
         {
 
-            __Item cat = null;
+            _RegexpParser_Item cat = null;
 
             // AND 1
             int _start_i1 = _index;
@@ -899,7 +1002,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Push(null); goto label2; }
 
             // CALLORVAR UnicodeGeneralCategory
-            __Item _r5;
+            _RegexpParser_Item _r5;
 
             _r5 = _MemoCall(_memo, "UnicodeGeneralCategory", _index, UnicodeGeneralCategory, null);
 
@@ -914,7 +1017,7 @@ namespace Verophyle.Regexp
 
             if (_r2_1 != null && _r2_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i2, _index, _memo.InputEnumerable, _r2_1.Results.Concat(_r2_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i2, _index, _memo.InputEnumerable, _r2_1.Results.Concat(_r2_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -934,7 +1037,7 @@ namespace Verophyle.Regexp
 
             if (_r1_1 != null && _r1_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i1, _index, _memo.InputEnumerable, _r1_1.Results.Concat(_r1_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i1, _index, _memo.InputEnumerable, _r1_1.Results.Concat(_r1_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -947,7 +1050,7 @@ namespace Verophyle.Regexp
             if (_r0 != null)
             {
                 _memo.Results.Pop();
-                _memo.Results.Push( new __Item(_r0.StartIndex, _r0.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Leaf<InputClass<char>>(new CategoryClass(cat.Inputs), ref NEXT_POS); }, _r0), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_r0.StartIndex, _r0.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Leaf<InputClass<char>>(new CategoryClass(cat.Inputs), ref NEXT_POS); }, _r0), true) );
             }
 
         }
@@ -956,8 +1059,8 @@ namespace Verophyle.Regexp
         public void Escaped(_RegexpParser_Memo _memo, int _index, _RegexpParser_Args _args)
         {
 
-            __Item hex = null;
-            __Item c = null;
+            _RegexpParser_Item hex = null;
+            _RegexpParser_Item c = null;
 
             // OR 0
             int _start_i0 = _index;
@@ -975,7 +1078,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Push(null); goto label3; }
 
             // CALLORVAR EscapedChar
-            __Item _r5;
+            _RegexpParser_Item _r5;
 
             _r5 = _MemoCall(_memo, "EscapedChar", _index, EscapedChar, null);
 
@@ -987,7 +1090,7 @@ namespace Verophyle.Regexp
 
             if (_r3_1 != null && _r3_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i3, _index, _memo.InputEnumerable, _r3_1.Results.Concat(_r3_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i3, _index, _memo.InputEnumerable, _r3_1.Results.Concat(_r3_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -1000,7 +1103,7 @@ namespace Verophyle.Regexp
             if (_r2 != null)
             {
                 _memo.Results.Pop();
-                _memo.Results.Push( new __Item(_r2.StartIndex, _r2.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Leaf<InputClass<char>>(new CharClass(Unescape(_IM_Result.Inputs)), ref NEXT_POS); }, _r2), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_r2.StartIndex, _r2.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Leaf<InputClass<char>>(new CharClass(Unescape(_IM_Result.Inputs)), ref NEXT_POS); }, _r2), true) );
             }
 
             // OR shortcut
@@ -1031,7 +1134,7 @@ namespace Verophyle.Regexp
             int _start_i14 = _index;
 
             // CALLORVAR HexDigit
-            __Item _r15;
+            _RegexpParser_Item _r15;
 
             _r15 = _MemoCall(_memo, "HexDigit", _index, HexDigit, null);
 
@@ -1041,7 +1144,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Push(null); goto label14; }
 
             // CALLORVAR HexDigit
-            __Item _r16;
+            _RegexpParser_Item _r16;
 
             _r16 = _MemoCall(_memo, "HexDigit", _index, HexDigit, null);
 
@@ -1053,7 +1156,7 @@ namespace Verophyle.Regexp
 
             if (_r14_1 != null && _r14_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i14, _index, _memo.InputEnumerable, _r14_1.Results.Concat(_r14_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i14, _index, _memo.InputEnumerable, _r14_1.Results.Concat(_r14_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -1065,7 +1168,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Push(null); goto label13; }
 
             // CALLORVAR HexDigit
-            __Item _r17;
+            _RegexpParser_Item _r17;
 
             _r17 = _MemoCall(_memo, "HexDigit", _index, HexDigit, null);
 
@@ -1077,7 +1180,7 @@ namespace Verophyle.Regexp
 
             if (_r13_1 != null && _r13_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i13, _index, _memo.InputEnumerable, _r13_1.Results.Concat(_r13_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i13, _index, _memo.InputEnumerable, _r13_1.Results.Concat(_r13_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -1089,7 +1192,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Push(null); goto label12; }
 
             // CALLORVAR HexDigit
-            __Item _r18;
+            _RegexpParser_Item _r18;
 
             _r18 = _MemoCall(_memo, "HexDigit", _index, HexDigit, null);
 
@@ -1101,7 +1204,7 @@ namespace Verophyle.Regexp
 
             if (_r12_1 != null && _r12_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i12, _index, _memo.InputEnumerable, _r12_1.Results.Concat(_r12_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i12, _index, _memo.InputEnumerable, _r12_1.Results.Concat(_r12_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -1118,7 +1221,7 @@ namespace Verophyle.Regexp
 
             if (_r9_1 != null && _r9_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i9, _index, _memo.InputEnumerable, _r9_1.Results.Concat(_r9_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i9, _index, _memo.InputEnumerable, _r9_1.Results.Concat(_r9_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -1148,7 +1251,7 @@ namespace Verophyle.Regexp
             int _start_i24 = _index;
 
             // CALLORVAR HexDigit
-            __Item _r25;
+            _RegexpParser_Item _r25;
 
             _r25 = _MemoCall(_memo, "HexDigit", _index, HexDigit, null);
 
@@ -1158,14 +1261,14 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Push(null); goto label24; }
 
             // CALLORVAR HexDigit
-            __Item _r27;
+            _RegexpParser_Item _r27;
 
             _r27 = _MemoCall(_memo, "HexDigit", _index, HexDigit, null);
 
             if (_r27 != null) _index = _r27.NextIndex;
 
             // QUES
-            if (_memo.Results.Peek() == null) { _memo.Results.Pop(); _memo.Results.Push(new __Item(_index, _memo.InputEnumerable)); }
+            if (_memo.Results.Peek() == null) { _memo.Results.Pop(); _memo.Results.Push(new _RegexpParser_Item(_index, _memo.InputEnumerable)); }
 
         label24: // AND
             var _r24_2 = _memo.Results.Pop();
@@ -1173,7 +1276,7 @@ namespace Verophyle.Regexp
 
             if (_r24_1 != null && _r24_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i24, _index, _memo.InputEnumerable, _r24_1.Results.Concat(_r24_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i24, _index, _memo.InputEnumerable, _r24_1.Results.Concat(_r24_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -1185,14 +1288,14 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Push(null); goto label23; }
 
             // CALLORVAR HexDigit
-            __Item _r29;
+            _RegexpParser_Item _r29;
 
             _r29 = _MemoCall(_memo, "HexDigit", _index, HexDigit, null);
 
             if (_r29 != null) _index = _r29.NextIndex;
 
             // QUES
-            if (_memo.Results.Peek() == null) { _memo.Results.Pop(); _memo.Results.Push(new __Item(_index, _memo.InputEnumerable)); }
+            if (_memo.Results.Peek() == null) { _memo.Results.Pop(); _memo.Results.Push(new _RegexpParser_Item(_index, _memo.InputEnumerable)); }
 
         label23: // AND
             var _r23_2 = _memo.Results.Pop();
@@ -1200,7 +1303,7 @@ namespace Verophyle.Regexp
 
             if (_r23_1 != null && _r23_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i23, _index, _memo.InputEnumerable, _r23_1.Results.Concat(_r23_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i23, _index, _memo.InputEnumerable, _r23_1.Results.Concat(_r23_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -1212,14 +1315,14 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Push(null); goto label22; }
 
             // CALLORVAR HexDigit
-            __Item _r31;
+            _RegexpParser_Item _r31;
 
             _r31 = _MemoCall(_memo, "HexDigit", _index, HexDigit, null);
 
             if (_r31 != null) _index = _r31.NextIndex;
 
             // QUES
-            if (_memo.Results.Peek() == null) { _memo.Results.Pop(); _memo.Results.Push(new __Item(_index, _memo.InputEnumerable)); }
+            if (_memo.Results.Peek() == null) { _memo.Results.Pop(); _memo.Results.Push(new _RegexpParser_Item(_index, _memo.InputEnumerable)); }
 
         label22: // AND
             var _r22_2 = _memo.Results.Pop();
@@ -1227,7 +1330,7 @@ namespace Verophyle.Regexp
 
             if (_r22_1 != null && _r22_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i22, _index, _memo.InputEnumerable, _r22_1.Results.Concat(_r22_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i22, _index, _memo.InputEnumerable, _r22_1.Results.Concat(_r22_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -1244,7 +1347,7 @@ namespace Verophyle.Regexp
 
             if (_r19_1 != null && _r19_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i19, _index, _memo.InputEnumerable, _r19_1.Results.Concat(_r19_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i19, _index, _memo.InputEnumerable, _r19_1.Results.Concat(_r19_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -1289,7 +1392,7 @@ namespace Verophyle.Regexp
             int _start_i41 = _index;
 
             // CALLORVAR HexDigit
-            __Item _r42;
+            _RegexpParser_Item _r42;
 
             _r42 = _MemoCall(_memo, "HexDigit", _index, HexDigit, null);
 
@@ -1299,7 +1402,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Push(null); goto label41; }
 
             // CALLORVAR HexDigit
-            __Item _r43;
+            _RegexpParser_Item _r43;
 
             _r43 = _MemoCall(_memo, "HexDigit", _index, HexDigit, null);
 
@@ -1311,7 +1414,7 @@ namespace Verophyle.Regexp
 
             if (_r41_1 != null && _r41_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i41, _index, _memo.InputEnumerable, _r41_1.Results.Concat(_r41_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i41, _index, _memo.InputEnumerable, _r41_1.Results.Concat(_r41_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -1323,7 +1426,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Push(null); goto label40; }
 
             // CALLORVAR HexDigit
-            __Item _r44;
+            _RegexpParser_Item _r44;
 
             _r44 = _MemoCall(_memo, "HexDigit", _index, HexDigit, null);
 
@@ -1335,7 +1438,7 @@ namespace Verophyle.Regexp
 
             if (_r40_1 != null && _r40_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i40, _index, _memo.InputEnumerable, _r40_1.Results.Concat(_r40_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i40, _index, _memo.InputEnumerable, _r40_1.Results.Concat(_r40_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -1347,7 +1450,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Push(null); goto label39; }
 
             // CALLORVAR HexDigit
-            __Item _r45;
+            _RegexpParser_Item _r45;
 
             _r45 = _MemoCall(_memo, "HexDigit", _index, HexDigit, null);
 
@@ -1359,7 +1462,7 @@ namespace Verophyle.Regexp
 
             if (_r39_1 != null && _r39_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i39, _index, _memo.InputEnumerable, _r39_1.Results.Concat(_r39_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i39, _index, _memo.InputEnumerable, _r39_1.Results.Concat(_r39_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -1371,7 +1474,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Push(null); goto label38; }
 
             // CALLORVAR HexDigit
-            __Item _r46;
+            _RegexpParser_Item _r46;
 
             _r46 = _MemoCall(_memo, "HexDigit", _index, HexDigit, null);
 
@@ -1383,7 +1486,7 @@ namespace Verophyle.Regexp
 
             if (_r38_1 != null && _r38_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i38, _index, _memo.InputEnumerable, _r38_1.Results.Concat(_r38_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i38, _index, _memo.InputEnumerable, _r38_1.Results.Concat(_r38_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -1395,7 +1498,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Push(null); goto label37; }
 
             // CALLORVAR HexDigit
-            __Item _r47;
+            _RegexpParser_Item _r47;
 
             _r47 = _MemoCall(_memo, "HexDigit", _index, HexDigit, null);
 
@@ -1407,7 +1510,7 @@ namespace Verophyle.Regexp
 
             if (_r37_1 != null && _r37_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i37, _index, _memo.InputEnumerable, _r37_1.Results.Concat(_r37_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i37, _index, _memo.InputEnumerable, _r37_1.Results.Concat(_r37_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -1419,7 +1522,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Push(null); goto label36; }
 
             // CALLORVAR HexDigit
-            __Item _r48;
+            _RegexpParser_Item _r48;
 
             _r48 = _MemoCall(_memo, "HexDigit", _index, HexDigit, null);
 
@@ -1431,7 +1534,7 @@ namespace Verophyle.Regexp
 
             if (_r36_1 != null && _r36_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i36, _index, _memo.InputEnumerable, _r36_1.Results.Concat(_r36_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i36, _index, _memo.InputEnumerable, _r36_1.Results.Concat(_r36_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -1443,7 +1546,7 @@ namespace Verophyle.Regexp
             if (_memo.Results.Peek() == null) { _memo.Results.Push(null); goto label35; }
 
             // CALLORVAR HexDigit
-            __Item _r49;
+            _RegexpParser_Item _r49;
 
             _r49 = _MemoCall(_memo, "HexDigit", _index, HexDigit, null);
 
@@ -1455,7 +1558,7 @@ namespace Verophyle.Regexp
 
             if (_r35_1 != null && _r35_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i35, _index, _memo.InputEnumerable, _r35_1.Results.Concat(_r35_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i35, _index, _memo.InputEnumerable, _r35_1.Results.Concat(_r35_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -1472,7 +1575,7 @@ namespace Verophyle.Regexp
 
             if (_r32_1 != null && _r32_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i32, _index, _memo.InputEnumerable, _r32_1.Results.Concat(_r32_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i32, _index, _memo.InputEnumerable, _r32_1.Results.Concat(_r32_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -1488,7 +1591,7 @@ namespace Verophyle.Regexp
             if (_r6 != null)
             {
                 _memo.Results.Pop();
-                _memo.Results.Push( new __Item(_r6.StartIndex, _r6.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Leaf<InputClass<char>>(new CharClass(UnHex(hex.Inputs)), ref NEXT_POS); }, _r6), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_r6.StartIndex, _r6.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Leaf<InputClass<char>>(new CharClass(UnHex(hex.Inputs)), ref NEXT_POS); }, _r6), true) );
             }
 
         label1: // OR
@@ -1518,7 +1621,7 @@ namespace Verophyle.Regexp
 
             if (_r51_1 != null && _r51_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i51, _index, _memo.InputEnumerable, _r51_1.Results.Concat(_r51_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i51, _index, _memo.InputEnumerable, _r51_1.Results.Concat(_r51_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -1531,7 +1634,7 @@ namespace Verophyle.Regexp
             if (_r50 != null)
             {
                 _memo.Results.Pop();
-                _memo.Results.Push( new __Item(_r50.StartIndex, _r50.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Leaf<InputClass<char>>(new CharClass(c.Inputs.First()), ref NEXT_POS); }, _r50), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_r50.StartIndex, _r50.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Leaf<InputClass<char>>(new CharClass(c.Inputs.First()), ref NEXT_POS); }, _r50), true) );
             }
 
         label0: // OR
@@ -1543,7 +1646,7 @@ namespace Verophyle.Regexp
         public void Ch(_RegexpParser_Memo _memo, int _index, _RegexpParser_Args _args)
         {
 
-            __Item c = null;
+            _RegexpParser_Item c = null;
 
             // AND 1
             int _start_i1 = _index;
@@ -1552,7 +1655,7 @@ namespace Verophyle.Regexp
             int _start_i2 = _index;
 
             // CALLORVAR SyntaxChar
-            __Item _r3;
+            _RegexpParser_Item _r3;
 
             _r3 = _MemoCall(_memo, "SyntaxChar", _index, SyntaxChar, null);
 
@@ -1560,7 +1663,7 @@ namespace Verophyle.Regexp
 
             // NOT 2
             var _r2 = _memo.Results.Pop();
-            _memo.Results.Push( _r2 == null ? new __Item(_start_i2, _memo.InputEnumerable) : null);
+            _memo.Results.Push( _r2 == null ? new _RegexpParser_Item(_start_i2, _memo.InputEnumerable) : null);
             _index = _start_i2;
 
             // AND shortcut
@@ -1578,7 +1681,7 @@ namespace Verophyle.Regexp
 
             if (_r1_1 != null && _r1_2 != null)
             {
-                _memo.Results.Push( new __Item(_start_i1, _index, _memo.InputEnumerable, _r1_1.Results.Concat(_r1_2.Results).Where(_NON_NULL), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_start_i1, _index, _memo.InputEnumerable, _r1_1.Results.Concat(_r1_2.Results).Where(_NON_NULL), true) );
             }
             else
             {
@@ -1591,7 +1694,7 @@ namespace Verophyle.Regexp
             if (_r0 != null)
             {
                 _memo.Results.Pop();
-                _memo.Results.Push( new __Item(_r0.StartIndex, _r0.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Leaf<InputClass<char>>(new CharClass(c.Inputs.First()), ref NEXT_POS); }, _r0), true) );
+                _memo.Results.Push( new _RegexpParser_Item(_r0.StartIndex, _r0.NextIndex, _memo.InputEnumerable, _Thunk(_IM_Result => { return new Node.Leaf<InputClass<char>>(new CharClass(c.Inputs.First()), ref NEXT_POS); }, _r0), true) );
             }
 
         }
@@ -1601,7 +1704,7 @@ namespace Verophyle.Regexp
         {
 
             // INPUT CLASS
-            _ParseInputClass(_memo, ref _index, '\'', '"', '\\', '0', 'a', 'b', 'f', 'n', 'r', 't', 'v');
+            _ParseInputClass(_memo, ref _index, '\'', '"', '\\', ']', '+', '*', '0', 'a', 'b', 'f', 'n', 'r', 't', 'v');
 
         }
 
@@ -1992,10 +2095,11 @@ namespace Verophyle.Regexp
 
             // NOT 0
             var _r0 = _memo.Results.Pop();
-            _memo.Results.Push( _r0 == null ? new __Item(_start_i0, _memo.InputEnumerable) : null);
+            _memo.Results.Push( _r0 == null ? new _RegexpParser_Item(_start_i0, _memo.InputEnumerable) : null);
             _index = _start_i0;
 
         }
+
 
     } // class RegexpParser
 

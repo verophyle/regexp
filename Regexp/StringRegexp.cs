@@ -35,7 +35,13 @@ namespace Verophyle.Regexp
             }
             else
             {
-                throw new ArgumentException(match.Error);
+                var msg = string.Format("{0} at pos {1}: {2} ^^ {3}",
+                    match.Error,
+                    match.ErrorIndex,
+                    text.Substring(0, match.ErrorIndex),
+                    text.Substring(match.ErrorIndex));
+
+                throw new ArgumentException(msg);
             }
         }
 

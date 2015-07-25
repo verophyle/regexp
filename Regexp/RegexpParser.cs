@@ -13,6 +13,8 @@ namespace Verophyle.Regexp
         static char Unescape(IEnumerable<char> chars)
         {
             var str = new string(chars.ToArray());
+            if (str == @"\]" || str == @"\+" || str == @"\*")
+                return str[1];
             return System.Text.RegularExpressions.Regex.Unescape(str)[0];
         }
 

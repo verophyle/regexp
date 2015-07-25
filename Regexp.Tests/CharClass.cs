@@ -52,5 +52,17 @@ namespace Verophyle.Regexp.Tests
             Assert.IsTrue(re.Matches("two'll"));
             Assert.IsFalse(re.Matches("123"));
         }
+
+        [TestMethod]
+        public void Utils_Regexp_CharClass_PlusMinus()
+        {
+            var re = new StringRegexp(@"[\+-]?([0-9]|_)+");
+            Assert.IsTrue(re.Matches("-123"));
+            Assert.IsTrue(re.Matches("+456"));
+            Assert.IsTrue(re.Matches("789"));
+            Assert.IsTrue(re.Matches("123_456"));
+            Assert.IsFalse(re.Matches(""));
+            Assert.IsFalse(re.Matches("asdf"));
+        }
     }
 }

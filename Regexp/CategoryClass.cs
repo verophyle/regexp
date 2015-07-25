@@ -16,7 +16,7 @@ namespace Verophyle.Regexp
 
         static IDictionary<string, UnicodeCategory> cat_map = null;
 
-        private CategoryClass()
+        protected CategoryClass()
         {
             if (cat_map == null)
                 GenCategoryMap();
@@ -53,8 +53,17 @@ namespace Verophyle.Regexp
                     };
                     break;
                 default:
-                    var cat = cat_map[new string(designation.ToArray())];
-                    Categories = new HashSet<UnicodeCategory> { cat };
+                    var str = new string(designation.ToArray());
+                    UnicodeCategory cat;
+                    if (cat_map.TryGetValue(str, out cat))
+                    {
+                        Categories = new HashSet<UnicodeCategory> { cat };
+                    }
+                    else
+                    {
+                        throw new Exception("Unknown unicode category " + str);
+                    }
+                    
                     break;
             }
         }
