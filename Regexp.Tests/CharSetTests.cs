@@ -1,4 +1,4 @@
-﻿// Verophyle.Regexp Copyright © Verophyle Informatics 2015
+﻿// Verophyle.Regexp Copyright © Verophyle Informatics 2017
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -6,10 +6,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Verophyle.Regexp.Tests
 {
     [TestClass]
-    public class CharClass
+    public class CharSetTests
     {
         [TestMethod]
-        public void Utils_Regexp_CharClass_Group()
+        public void CharSet_Group()
         {
             var re = new StringRegexp("a[bc]d");
             Assert.IsTrue(re.Matches("abd"));
@@ -19,7 +19,7 @@ namespace Verophyle.Regexp.Tests
         }
 
         [TestMethod]
-        public void Utils_Regexp_CharClass_NegGroup()
+        public void CharSet_NegGroup()
         {
             var re = new StringRegexp("a[^bc]d");
             Assert.IsTrue(re.Matches("azd"));
@@ -29,7 +29,7 @@ namespace Verophyle.Regexp.Tests
         }
 
         [TestMethod]
-        public void Utils_Regexp_CharClass_UnicodeClass()
+        public void CharSet_UnicodeClass()
         {
             var re = new StringRegexp(@"\p{Ll}+");
             Assert.IsTrue(re.Matches("abc"));
@@ -37,7 +37,7 @@ namespace Verophyle.Regexp.Tests
         }
 
         [TestMethod]
-        public void Utils_Regexp_CharClass_UnicodeClassGroup()
+        public void CharSet_UnicodeClassGroup()
         {
             var re = new StringRegexp(@"[\p{Ll}\p{Nd}]+");
             Assert.IsTrue(re.Matches("a1b2"));
@@ -45,7 +45,16 @@ namespace Verophyle.Regexp.Tests
         }
 
         [TestMethod]
-        public void Utils_Regexp_CharClass_WordToken()
+        public void CharSet_Hexadecimal()
+        {
+            var re = new StringRegexp(@"\x{20}");
+            Assert.IsTrue(re.Matches(" "));
+            Assert.IsFalse(re.Matches(""));
+            Assert.IsFalse(re.Matches("20"));
+        }
+
+        [TestMethod]
+        public void CharSet_WordToken()
         {
             var re = new StringRegexp(@"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Mn}\p{Mc}\p{Me}]+('(m|re|s|t|d|ve|ll))?");
             Assert.IsTrue(re.Matches("one"));
@@ -54,9 +63,9 @@ namespace Verophyle.Regexp.Tests
         }
 
         [TestMethod]
-        public void Utils_Regexp_CharClass_PlusMinus()
+        public void CharSet_PlusMinus()
         {
-            var re = new StringRegexp(@"[\+-]?([0-9]|_)+");
+            var re = new StringRegexp(@"[+-]?([0-9]|_)+");
             Assert.IsTrue(re.Matches("-123"));
             Assert.IsTrue(re.Matches("+456"));
             Assert.IsTrue(re.Matches("789"));

@@ -1,4 +1,4 @@
-// Verophyle.Regexp Copyright © Verophyle Informatics 2015
+// Verophyle.Regexp Copyright © Verophyle Informatics 2017
 
 // Parser for simple string regular expressions.
 ironmeta RegexpParser<char, Regexp<InputClass<char>>>

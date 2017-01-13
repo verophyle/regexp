@@ -1,4 +1,4 @@
-﻿// Verophyle.Regexp Copyright © Verophyle Informatics 2015
+﻿// Verophyle.Regexp Copyright © Verophyle Informatics 2017
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,7 +9,7 @@ namespace Verophyle.Regexp.Tests
     public class BasicTests
     {
         [TestMethod]
-        public void Utils_Regexp_Basic_TestCat()
+        public void Basic_TestCat()
         {
             var re = new StringRegexp("ab");
             Assert.IsTrue(re.Matches("ab"));
@@ -20,7 +20,7 @@ namespace Verophyle.Regexp.Tests
         }
 
         [TestMethod]
-        public void Utils_Regexp_Basic_TestOr()
+        public void Basic_TestOr()
         {
             var re = new StringRegexp("a|b");
             Assert.IsTrue(re.Matches("a"));
@@ -30,7 +30,7 @@ namespace Verophyle.Regexp.Tests
         }
 
         [TestMethod]
-        public void Utils_Regexp_Basic_TestPlus()
+        public void Basic_TestPlus()
         {
             var re = new StringRegexp("a+b");
             Assert.IsTrue(re.Matches("ab"));
@@ -43,7 +43,7 @@ namespace Verophyle.Regexp.Tests
         }
 
         [TestMethod]
-        public void Utils_Regexp_Basic_TestStar()
+        public void Basic_TestStar()
         {
             var re = new StringRegexp("a*b");
             Assert.IsTrue(re.Matches("ab"));
@@ -54,7 +54,7 @@ namespace Verophyle.Regexp.Tests
         }
 
         [TestMethod]
-        public void Utils_Regexp_Basic_TestDot()
+        public void Basic_TestDot()
         {
             var re = new StringRegexp("a.b");
             Assert.IsTrue(re.Matches("azb"));
@@ -62,7 +62,15 @@ namespace Verophyle.Regexp.Tests
         }
 
         [TestMethod]
-        public void Utils_Regexp_Basic_TestGroup()
+        public void Basic_TestDotDot()
+        {
+            var re = new StringRegexp("a.b.c");
+            Assert.IsTrue(re.Matches("axbyc"));
+            Assert.IsFalse(re.Matches("abc"));
+        }
+
+        [TestMethod]
+        public void Basic_TestGroup()
         {
             var re = new StringRegexp("ab(cd|ef)gh");
             Assert.IsTrue(re.Matches("abcdgh"));

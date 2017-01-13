@@ -1,4 +1,4 @@
-﻿// Verophyle.Regexp Copyright © Verophyle Informatics 2015
+﻿// Verophyle.Regexp Copyright © Verophyle Informatics 2017
 
 using System;
 using System.Collections.Generic;
@@ -7,41 +7,38 @@ using System.Text;
 
 namespace Verophyle.Regexp
 {
-    public class StringRegexp : DeterministicAutomaton<char>
+    public class StringRegexp : DeterministicAutomaton<char, InputSet.UnicodeCategoryMatcher>
     {
         string text;
         bool literal;
 
-        public StringRegexp(IEnumerable<char> str, bool literal = false)
+        public StringRegexp(IEnumerable<char> spec, bool literal = false)
             : base()
         {
-            this.text = new string(str.ToArray());
+            this.text = new string(spec.ToArray());
             this.literal = literal;
 
             if (literal)
             {
                 var sb = new StringBuilder();
-                foreach (var ch in str)
-                    sb.AppendFormat("\\U{0:X8}", (int)ch);
-                str = sb.ToString();
+                foreach (var ch in spec)
+                    sb.AppendFormat("\\U{{{0:X8}}}", (int)ch);
+                spec = sb.ToString();
             }
 
-            var matcher = new RegexpParser();
-            var match = matcher.GetMatch(str, matcher.Regex);
-            if (match.Success)
+            var errors = new List<string>();
+            int start = 0, next;
+            var node = StringRegexpParser.ParseRegexp(spec, start, out next, errors);
+            if (node != null && !errors.Any())
             {
-                var re = match.Result;
-                Compile(re);
+                Compile(node);
             }
             else
             {
-                var msg = string.Format("{0} at pos {1}: {2} ^^ {3}",
-                    match.Error,
-                    match.ErrorIndex,
-                    text.Substring(0, match.ErrorIndex),
-                    text.Substring(match.ErrorIndex));
-
-                throw new ArgumentException(msg);
+                var msg = errors.Any()
+                    ? string.Join(", ", errors)
+                    : "unexpected error";
+                throw new ArgumentException(msg, nameof(spec));
             }
         }
 
