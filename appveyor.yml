@@ -8,7 +8,7 @@ environment:
 
 install:
 - nuget install secure-file -ExcludeVersion
-- secure-file\tools\secure-file -decrypt Regexp\Verophyle.snk.enc -secret %key_secret%
+- secure-file\tools\secure-file.exe -decrypt Regexp\Verophyle.snk.enc -secret %key_secret%
 
 build_script:
 - msbuild Verophyle.Regexp.net45.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"

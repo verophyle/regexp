@@ -4,6 +4,7 @@
 Regexp/Verophyle.snk
 Regexp/secure-file/
 Package/lib/
+secure-file/
 
 # User-specific files
 *.suo
