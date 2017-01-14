@@ -18,7 +18,6 @@ namespace Verophyle.Regexp
         public abstract class InputSet<T> : IInputSet<T>
         {
             static int NEXT_TRANSITION_INDEX = 0;
-            static IInputSet<T> dotSet;
 
             protected ISet<T> inputs;
             protected ISet<int> inputCodes;
