@@ -49,8 +49,15 @@ namespace Verophyle.Regexp.InputSet
             if (setsByInput.TryGetValue(input, out result))
                 yield return result;
 
+            UnicodeCategory uc =
+#if NETSTANDARD
+                CharUnicodeInfo.GetUnicodeCategory(input);
+#else
+                char.GetUnicodeCategory(input);
+#endif
+
             UnicodeCategorySet cc;
-            if (categorySets.TryGetValue(char.GetUnicodeCategory(input), out cc))
+            if (categorySets.TryGetValue(uc, out cc))
                 yield return cc;
 
             if (dotClass != null)

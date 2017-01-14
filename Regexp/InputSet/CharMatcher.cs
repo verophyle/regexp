@@ -1,4 +1,4 @@
-﻿// Copyright © Verophyle Informatics 2017
+﻿// Verophyle.Regexp Copyright © Verophyle Informatics 2017
 
 using System.Collections.Generic;
 using System.Linq;

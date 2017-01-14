@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+  <PropertyGroup Label="Configuration">
+    <AssemblyName>Verophyle.Regexp</AssemblyName>
+    <RootNamespace>Verophyle.Regexp</RootNamespace>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <DefineConstants>TRACE;DEBUG;NETSTANDARD</DefineConstants>
+    <OutputPath>..\Package\lib</OutputPath>
+    <DelaySign>False</DelaySign>
+    <SignAssembly>True</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>netstandard1.4</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AssemblyOriginatorKeyFile>Verophyle.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="**\*.cs" />
+    <EmbeddedResource Include="**\*.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Verophyle.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NETStandard.Library" Version="1.6" />
+  </ItemGroup>
+</Project>

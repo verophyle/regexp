@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Verophyle.Regexp
@@ -191,7 +192,15 @@ namespace Verophyle.Regexp
 
         TMatcher CreateMatcher(IEnumerable<IInputSet<T>> inputClasses)
         {
+#if NETSTANDARD
+            var ctor = typeof(TMatcher).GetTypeInfo().DeclaredConstructors.FirstOrDefault(c =>
+            {
+                var parms = c.GetParameters();
+                return parms.Length == 1 && typeof(IEnumerable<IInputSet<T>>).GetTypeInfo().IsAssignableFrom(parms[0].ParameterType.GetTypeInfo());
+            });
+#else
             var ctor = typeof(TMatcher).GetConstructor(new Type[] { typeof(IEnumerable<IInputSet<T>>) });
+#endif
             if (ctor == null)
             {
                 throw new Exception(string.Format("Unable to find a constructor for {0} with a parameter of type IEnumerable<IInputSet<{1}>>",
@@ -262,7 +271,30 @@ namespace Verophyle.Regexp
                     else
                     {
                         Node.Node<T> topNode = null;
-                        var ctor = node.GetType().GetConstructor(CTOR_PARAM_TYPES);
+                        var ctor =
+#if NETSTANDARD
+                            node.GetType().GetTypeInfo().DeclaredConstructors.FirstOrDefault(c =>
+                            {
+                                var parms = c.GetParameters();
+                                if (parms.Length != CTOR_PARAM_TYPES.Length)
+                                    return false;
+                                for (int i = 0; i < parms.Length; i++)
+                                {
+                                    if (!CTOR_PARAM_TYPES[i].GetTypeInfo().IsAssignableFrom(parms[i].ParameterType.GetTypeInfo()))
+                                        return false;
+                                }
+                                return true;
+                            });
+#else
+                            node.GetType().GetConstructor(CTOR_PARAM_TYPES);
+#endif
+                        if (ctor == null)
+                        {
+                            throw new Exception(string.Format("Unable to find constructor for {0} with parameters of type ({1})",
+                                node.GetType().Name,
+                                string.Join(", ", CTOR_PARAM_TYPES.Select(t => t.Name))));
+                        }
+
                         foreach (var disjoint in disjointSets)
                         {
                             var newNode = (Node.Node<T>)ctor.Invoke(new object[] { disjoint, leafNode.Pos });
