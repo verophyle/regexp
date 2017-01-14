@@ -80,7 +80,7 @@ namespace Verophyle.Regexp
             public override string ToString()
             {
 #if !DEBUG
-            if (str == null)
+            if (debugStr == null)
 #endif
                 debugStr = string.Format("{0}: {1}{2}{3}",
                      TransitionIndex,

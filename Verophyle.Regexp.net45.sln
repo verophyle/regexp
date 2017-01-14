@@ -1,11 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Verophyle.Regexp", "Regexp\Regexp.net45.csproj", "{AA43D0F6-AFC3-4ED4-844B-DE47E11E36FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regexp.net45", "Regexp\Regexp.net45.csproj", "{AA43D0F6-AFC3-4ED4-844B-DE47E11E36FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regexp.Tests", "Regexp.Tests\Regexp.Tests.net45.csproj", "{2CB72D9D-DC84-41F5-8D66-3A34925A5748}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regexp.Tests.net45", "Regexp.Tests\Regexp.Tests.net45.csproj", "{2CB72D9D-DC84-41F5-8D66-3A34925A5748}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A23A324F-DDFB-4EF5-B024-86CB2872073B}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.md = README.md
+		Package\Regexp.nuspec = Package\Regexp.nuspec
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

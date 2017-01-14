@@ -76,7 +76,7 @@ namespace Verophyle.Regexp.Node
         public override string ToString()
         {
 #if !DEBUG
-            if (str == null)
+            if (debugStr == null)
 #endif
             debugStr = this.ToString("");
             return debugStr;

@@ -1,8 +1,7 @@
-﻿using System;
+﻿// Copyright © Verophyle Informatics 2017
+
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Verophyle.Regexp.InputSet
 {

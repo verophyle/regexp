@@ -1,15 +1,18 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$</id>
-    <version>$version$</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <!-- Keep these in sync with Regexp\Properties\AssemblyInfo.cs -->
+    <id>Verophyle.Regexp</id>
+    <version>2.0.0</version>
+    <title>Verophyle.Regexp</title>
+    <authors>Verophyle Informatics, Gordon Tisher</authors>
+    <owners>kulibali</owners>
     <licenseUrl>https://github.com/verophyle/regexp/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/verophyle/regexp</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
-    <copyright>Copyright 2015 Verophyle Informatics</copyright>
+    <description>Simple DFA-based regular expressions for .NET.</description>
+    <copyright>Copyright © Verophyle Informatics 2017</copyright>
+    <tags>regex dfa</tags>
+    <releaseNotes>Comprehensive refactoring.</releaseNotes>
   </metadata>
 </package>

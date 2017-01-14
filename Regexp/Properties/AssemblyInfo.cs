@@ -1,5 +1,6 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿// Copyright © Verophyle Informatics 2017
+
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Verophyle.Regexp")]
@@ -7,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Verophyle Informatics")]
 [assembly: AssemblyProduct("Verophyle.Regexp")]
-[assembly: AssemblyCopyright("Copyright © Verophyle Informatics 2016")]
+[assembly: AssemblyCopyright("Copyright © Verophyle Informatics 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -15,5 +16,5 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("aa43d0f6-afc3-4ed4-844b-de47e11e36fd")]
 
-[assembly: AssemblyVersion("1.2.*")]
-[assembly: AssemblyInformationalVersion("1.2.0")]
+[assembly: AssemblyVersion("2.0.*")]
+[assembly: AssemblyInformationalVersion("2.0.0")]
