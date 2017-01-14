@@ -14,7 +14,7 @@ build_script:
 - msbuild Verophyle.Regexp.net45.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 - msbuild Verophyle.Regexp.netstandard1.4.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 - cd Package
-- nuget pack --symbols Regexp.nuspec
+- nuget pack Regexp.nuspec -symbols
 
 artifacts:
 - path: Package\*.nupkg
