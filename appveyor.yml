@@ -3,9 +3,8 @@ configuration: Release
 environment:
   key_secret: D2DE09A4-367A-4222-9816-9C7C9D924A5C
 install:
-- cmd: >-
-    nuget install secure-file -ExcludeVersion
-    secure-file\tools\secure-file -decrypt Regexp\Verophyle.snk.enc -secret %key_secret%
+- nuget install secure-file -ExcludeVersion
+- secure-file\tools\secure-file -decrypt Regexp\Verophyle.snk.enc -secret %key_secret%
 build:
   publish_nuget: true
   publish_nuget_symbols: true
