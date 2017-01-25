@@ -50,7 +50,7 @@ namespace Verophyle.Regexp.InputSet
                 yield return result;
 
             UnicodeCategory uc =
-#if NETSTANDARD
+#if NETSTANDARD1_4
                 CharUnicodeInfo.GetUnicodeCategory(input);
 #else
                 char.GetUnicodeCategory(input);

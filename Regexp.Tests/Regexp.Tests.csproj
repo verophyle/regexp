@@ -3,11 +3,11 @@
     <AssemblyName>Verophyle.Regexp.Tests</AssemblyName>
     <RootNamespace>Verophyle.Regexp.Tests</RootNamespace>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <DefineConstants>TRACE;DEBUG;NETSTANDARD</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp1.0</TargetFramework>
+    <TargetFrameworks>netcoreapp1.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="**\*.cs" />
@@ -20,7 +20,7 @@
     <PackageReference Include="MSTest.TestFramework" Version="1.0.6-preview" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Regexp\Regexp.netstandard1.4.csproj" />
+    <ProjectReference Include="..\Regexp\Regexp.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26020.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Regexp.netstandard1.4", "Regexp\Regexp.netstandard1.4.csproj", "{9EF0EFFA-EB38-4339-9EB6-C9DC80732375}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Regexp", "Regexp\Regexp.csproj", "{9EF0EFFA-EB38-4339-9EB6-C9DC80732375}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Regexp.Tests.netstandard1.4", "Regexp.Tests\Regexp.Tests.netstandard1.4.csproj", "{C4C19FBE-3962-4691-9CA2-74841CB5DABD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Regexp.Tests", "Regexp.Tests\Regexp.Tests.csproj", "{C4C19FBE-3962-4691-9CA2-74841CB5DABD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E14FBD9B-8BA1-4537-B7D4-2A19D31302E1}"
 	ProjectSection(SolutionItems) = preProject

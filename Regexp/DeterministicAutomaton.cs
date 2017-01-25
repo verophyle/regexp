@@ -192,7 +192,7 @@ namespace Verophyle.Regexp
 
         TMatcher CreateMatcher(IEnumerable<IInputSet<T>> inputClasses)
         {
-#if NETSTANDARD
+#if NETSTANDARD1_4
             var ctor = typeof(TMatcher).GetTypeInfo().DeclaredConstructors.FirstOrDefault(c =>
             {
                 var parms = c.GetParameters();
@@ -272,7 +272,7 @@ namespace Verophyle.Regexp
                     {
                         Node.Node<T> topNode = null;
                         var ctor =
-#if NETSTANDARD
+#if NETSTANDARD1_4
                             node.GetType().GetTypeInfo().DeclaredConstructors.FirstOrDefault(c =>
                             {
                                 var parms = c.GetParameters();
