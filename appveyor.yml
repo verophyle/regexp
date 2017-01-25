@@ -1,4 +1,4 @@
-version: 2.1.{build}
+version: {version_number}.{build}
 
 branches:
   only:
@@ -11,6 +11,7 @@ image: Visual Studio 2017 RC
 configuration: Release
 
 environment:
+  version_number: 2.1.1
   snk_secret:
     secure: 5q+Cyl0sRtamI4kHMyIGgRttc7aSjz+1iNbXcY3EpMNT98RYBp3/tY83y14RcNNC
 
@@ -21,15 +22,14 @@ install:
 assembly_info:
   patch: true
   file: *AssemblyInfo.cs
-  assembly_version: "{version}"
-  assembly_file_version: "{version}"
-  assembly_informational_version: "{version}"
+  assembly_version: {version}
+  assembly_file_version: {version_number}
+  assembly_informational_version: {version_number}
 
 build_script:
-#- msbuild Verophyle.Regexp.net45.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-- msbuild Verophyle.Regexp.netstandard1.4.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+- msbuild Verophyle.Regexp.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 - cd Package
-- nuget pack Regexp.nuspec -Symbols -Version %APPVEYOR_BUILD_VERSION%
+- nuget pack Regexp.nuspec -Symbols -Version %VERSION_NUMBER%
 
 artifacts:
 - path: Package\*.nupkg
