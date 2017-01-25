@@ -3,6 +3,7 @@
   <metadata>
     <id>Verophyle.Regexp</id>
     <title>Verophyle.Regexp</title>
+    <version>2.1.0</version>
     <authors>Verophyle Informatics, Gordon Tisher</authors>
     <owners>kulibali</owners>
     <licenseUrl>https://github.com/verophyle/regexp/blob/master/LICENSE</licenseUrl>
