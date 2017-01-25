@@ -1,4 +1,4 @@
-version: "{version_number}.{build}"
+version: "2.1.1.{build}"
 
 branches:
   only:
@@ -11,7 +11,6 @@ image: Visual Studio 2017 RC
 configuration: Release
 
 environment:
-  version_number: 2.1.1
   snk_secret:
     secure: 5q+Cyl0sRtamI4kHMyIGgRttc7aSjz+1iNbXcY3EpMNT98RYBp3/tY83y14RcNNC
 
@@ -22,7 +21,7 @@ install:
 build_script:
 - msbuild Verophyle.Regexp.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 - cd Package
-- nuget pack Regexp.nuspec -Symbols -Version %VERSION_NUMBER%
+- nuget pack Regexp.nuspec -Symbols -Version %APPVEYOR_BUILD_VERSION%
 
 artifacts:
 - path: Package\*.nupkg
