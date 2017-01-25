@@ -1,9 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <!-- Keep these in sync with Regexp\Properties\AssemblyInfo.cs -->
     <id>Verophyle.Regexp</id>
-    <version>2.0.0</version>
     <title>Verophyle.Regexp</title>
     <authors>Verophyle Informatics, Gordon Tisher</authors>
     <owners>kulibali</owners>

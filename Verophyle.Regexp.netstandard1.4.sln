@@ -10,6 +10,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E14FBD9B-8BA1-4537-B7D4-2A19D31302E1}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
+		LICENSE = LICENSE
+		README.md = README.md
+		Package\Regexp.nuspec = Package\Regexp.nuspec
 	EndProjectSection
 EndProject
 Global

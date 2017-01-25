@@ -1,4 +1,7 @@
 # regexp
+
+[![Build status](https://ci.appveyor.com/api/projects/status/dfg3a9soxvxe6u45/branch/master?svg=true)](https://ci.appveyor.com/project/kulibali/regexp/branch/master)
+
 Simple DFA-based regular expressions for .NET.
 
 Special characters are:

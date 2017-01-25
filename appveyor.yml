@@ -1,4 +1,12 @@
-version: '{build}'
+version: 2.1.{build}
+
+branches:
+  only:
+    - master
+
+skip_non_tags: true
+
+image: Visual Studio 2017 RC
 
 configuration: Release
 
@@ -10,11 +18,18 @@ install:
 - nuget install secure-file -ExcludeVersion
 - secure-file\tools\secure-file.exe -decrypt Regexp\Verophyle.snk.enc -secret %snk_secret%
 
+assembly_info:
+  patch: true
+  file: *AssemblyInfo.cs
+  assembly_version: "{version}"
+  assembly_file_version: "{version}"
+  assembly_informational_version: "{version}"
+
 build_script:
-- msbuild Verophyle.Regexp.net45.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+#- msbuild Verophyle.Regexp.net45.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 - msbuild Verophyle.Regexp.netstandard1.4.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 - cd Package
-- nuget pack Regexp.nuspec -symbols
+- nuget pack Regexp.nuspec -Symbols -Version %APPVEYOR_BUILD_VERSION%
 
 artifacts:
 - path: Package\*.nupkg

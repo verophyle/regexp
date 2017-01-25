@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <PropertyGroup Label="Configuration">
     <AssemblyName>Verophyle.Regexp</AssemblyName>
     <RootNamespace>Verophyle.Regexp</RootNamespace>
@@ -7,6 +7,13 @@
     <OutputPath>..\Package\lib</OutputPath>
     <DelaySign>False</DelaySign>
     <SignAssembly>True</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Authors>Gordon Tisher</Authors>
+    <Company>Verophyle Informatics</Company>
+    <AssemblyTitle>Verophyle.Regexp</AssemblyTitle>
+    <Description>Simple DFA-based regular expressions for .NET.</Description>
+    <Copyright>Copyright © Verophyle Informatics 2017</Copyright>
   </PropertyGroup>
   <PropertyGroup>
     <TargetFramework>netstandard1.4</TargetFramework>
