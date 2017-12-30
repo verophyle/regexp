@@ -17,6 +17,9 @@ install:
 - if defined snk_secret (secure-file\tools\secure-file.exe -decrypt Verophyle.Regexp\Verophyle.snk.enc -secret %snk_secret%)
 - if not defined snk_secret (copy Verophyle.Regexp\Verophyle.PRS.snk Verophyle.Regexp\Verophyle.snk)
 
+before_build:
+- nuget restore
+
 build:
   verbosity: minimal
 
