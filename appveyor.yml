@@ -4,9 +4,7 @@ branches:
   only:
     - master
 
-skip_non_tags: true
-
-image: Visual Studio 2017 RC
+image: Visual Studio 2017
 
 configuration: Release
 
@@ -15,19 +13,17 @@ environment:
     secure: 5q+Cyl0sRtamI4kHMyIGgRttc7aSjz+1iNbXcY3EpMNT98RYBp3/tY83y14RcNNC
 
 install:
-- nuget install secure-file -ExcludeVersion
-- secure-file\tools\secure-file.exe -decrypt Regexp\Verophyle.snk.enc -secret %snk_secret%
+- if defined snk_secret (nuget install secure-file -ExcludeVersion)
+- if defined snk_secret (secure-file\tools\secure-file.exe -decrypt Regexp\Verophyle.snk.enc -secret %snk_secret%)
+- if not defined snk_secret (copy Verophyle.Regexp\Verophyle.PRS.snk Verophyle.Regexp\Verophyle.snk)
 
-build_script:
-- msbuild Verophyle.Regexp.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-- cd Package
-- nuget pack Regexp.nuspec -Symbols -Version %APPVEYOR_BUILD_VERSION%
-
-artifacts:
-- path: Package\*.nupkg
+build:
+  verbosity: minimal
 
 deploy:
   provider: NuGet
+  on:
+    appveyor_repo_tag: true
   api_key:
     secure: zgS1RlHnfRi8sNKEkm2WqqNa9U7fYvJad8z5o0hNsP2VrOcUDuFsTsf28yFNOu0h
   skip_symbols: false

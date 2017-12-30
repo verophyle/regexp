@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net471;net462</TargetFrameworks>
+    <SignAssembly>true</SignAssembly>
+    <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile>Verophyle.snk</AssemblyOriginatorKeyFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Authors>Gordon Tisher</Authors>
+    <Company>Verophyle Informatics</Company>
+    <Description>Simple DFA-based regular expressions for .NET.</Description>
+    <Copyright>Copyright © Verophyle Informatics 2018</Copyright>
+    <PackageLicenseUrl>https://github.com/verophyle/regexp/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/verophyle/regexp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/verophyle/regexp</RepositoryUrl>
+    <PackageTags>regex dfa</PackageTags>
+    <AssemblyVersion>2.1.1.0</AssemblyVersion>
+    <FileVersion>2.1.1.0</FileVersion>
+    <Version>2.1.1</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+
+</Project>
