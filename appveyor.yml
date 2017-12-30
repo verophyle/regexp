@@ -23,6 +23,9 @@ before_build:
 build:
   verbosity: minimal
 
+artifacts:
+  path: **\*.nupkg
+
 deploy:
   provider: NuGet
   on:
