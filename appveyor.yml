@@ -14,7 +14,7 @@ environment:
 
 install:
 - if defined snk_secret (nuget install secure-file -ExcludeVersion)
-- if defined snk_secret (secure-file\tools\secure-file.exe -decrypt Regexp\Verophyle.snk.enc -secret %snk_secret%)
+- if defined snk_secret (secure-file\tools\secure-file.exe -decrypt Verophyle.Regexp\Verophyle.snk.enc -secret %snk_secret%)
 - if not defined snk_secret (copy Verophyle.Regexp\Verophyle.PRS.snk Verophyle.Regexp\Verophyle.snk)
 
 build:
