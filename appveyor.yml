@@ -24,7 +24,7 @@ build:
   verbosity: minimal
 
 artifacts:
-  path: **\*.nupkg
+- path: **\*.nupkg
 
 deploy:
   provider: NuGet
