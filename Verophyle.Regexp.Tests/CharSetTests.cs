@@ -73,5 +73,22 @@ namespace Verophyle.Regexp.Tests
             Assert.IsFalse(re.Matches(""));
             Assert.IsFalse(re.Matches("asdf"));
         }
+
+        [TestMethod]
+        public void CharSet_NotNewLine()
+        {
+            var re = new StringRegexp(@"[^\r\n]+");
+            var input = "Hello!\n";
+            int i = 0, last = -1;
+            do
+            {
+                re.ProcessInput(input[i]);
+                if (re.Succeeded)
+                    last = i;
+            }
+            while (++i < input.Length && !re.Failed);
+            Assert.AreEqual(7, i);
+            Assert.AreEqual(6, last);
+        }
     }
 }
