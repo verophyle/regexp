@@ -88,7 +88,7 @@ namespace Verophyle.Regexp.Tests
             }
             while (++i < input.Length && !re.Failed);
             Assert.AreEqual(7, i);
-            Assert.AreEqual(6, last);
+            Assert.AreEqual(5, last);
         }
     }
 }

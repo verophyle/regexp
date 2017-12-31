@@ -316,6 +316,18 @@ namespace Verophyle.Regexp
                     cur++;
                     node = ParseHexadecimal(str, cur, out cur, ref nodePos, errors);
                     break;
+                case 'r':
+                    cur++;
+                    node = new Node.Leaf<char>(new InputSet.CharSet('\r'), ref nodePos);
+                    break;
+                case 'n':
+                    cur++;
+                    node = new Node.Leaf<char>(new InputSet.CharSet('\n'), ref nodePos);
+                    break;
+                case 't':
+                    cur++;
+                    node = new Node.Leaf<char>(new InputSet.CharSet('\t'), ref nodePos);
+                    break;
                 case default(char):
                     errors.Add(string.Format("expected escaped character at index {0}", cur));
                     goto done;
