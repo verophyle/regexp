@@ -1,6 +1,7 @@
 # Verophyle.Regexp
 
-[![Build status](https://ci.appveyor.com/api/projects/status/dfg3a9soxvxe6u45/branch/master?svg=true)](https://ci.appveyor.com/project/kulibali/regexp/branch/master)
+| Build | [![AppVeyor](https://img.shields.io/appveyor/ci/kulibali/regexp.svg)]() |
+| NuGet | [![NuGet](https://img.shields.io/nuget/dt/Verophyle.Regexp.svg)]() |
 
 Simple DFA-based regular expressions for .NET.
 
