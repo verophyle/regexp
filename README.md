@@ -2,8 +2,8 @@
 
 |       |       |
 | ----- | ----- |
-| Build | [![AppVeyor](https://img.shields.io/appveyor/ci/kulibali/regexp.svg)]() |
-| NuGet | [![NuGet](https://img.shields.io/nuget/dt/Verophyle.Regexp.svg)]() |
+| Build | [![AppVeyor](https://img.shields.io/appveyor/ci/kulibali/regexp.svg)](https://ci.appveyor.com/project/kulibali/regexp) |
+| NuGet | [![NuGet](https://img.shields.io/nuget/dt/Verophyle.Regexp.svg)](https://www.nuget.org/packages/Verophyle.Regexp) |
 
 Simple DFA-based regular expressions for .NET.
 
