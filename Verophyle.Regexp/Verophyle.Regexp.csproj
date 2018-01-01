@@ -15,9 +15,13 @@
     <PackageProjectUrl>https://github.com/verophyle/regexp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/verophyle/regexp</RepositoryUrl>
     <PackageTags>regex dfa</PackageTags>
-    <AssemblyVersion>2.2.0.0</AssemblyVersion>
-    <FileVersion>2.2.0.0</FileVersion>
-    <Version>2.2.0</Version>
+    <AssemblyVersion>2.2.1.0</AssemblyVersion>
+    <FileVersion>2.2.1.0</FileVersion>
+    <Version>2.2.1</Version>
+    <PackageReleaseNotes>- 2.2.1: Fixed a bug in parsing character class ranges.
+- 2.2.0: Fixed a bug in parsing escaped characters.
+- 2.0: Refactoring
+- 1.0: Initial version</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
