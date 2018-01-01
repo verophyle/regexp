@@ -120,7 +120,7 @@ namespace Verophyle.Regexp
                 }
                 else if (ch == '\\')
                 {
-                    elem = ParseEscaped(str, cur, out cur, ref nodePos, errors);
+                    elem = new Node.Leaf<char>(ParseEscaped(str, cur, out cur, errors), ref nodePos);
                 }
                 else if (ch == '.')
                 {
@@ -191,80 +191,47 @@ namespace Verophyle.Regexp
                 cur++;
             }
 
-            var seq = ParseSequence(false, str, cur, out cur, ref nodePos, errors);
-            if (seq != null)
+            var inputSets = new List<IInputSet<char>>();
+            while (true)
             {
-                char ket = str.ElementAtOrDefault(cur);
-                if (ket == ']')
+                var range = ParseCategoryRange(str, cur, out cur, errors);
+                if (range != null)
                 {
-                    cur++;
+                    inputSets.Add(range);
                 }
                 else
                 {
-                    errors.Add(string.Format("expected ']' at index {0}", cur));
-                    goto done;
-                }
-
-                // handle ranges
-                var oldSeq = new Queue<Node.Node<char>>(seq.InLCROrder().OfType<Node.Leaf<char>>());
-                if (oldSeq.Count >= 3)
-                {
-                    var newSeq = new List<Node.Node<char>>();
-
-                    int index = 0;
-                    while (index + 2 < oldSeq.Count)
+                    char ch = str.ElementAtOrDefault(cur);
+                    if (ch == ']')
                     {
-                        var first = oldSeq.Dequeue();
-                        if (!IsSingleChar(first))
-                        {
-                            newSeq.Add(first);
-                            goto next;
-                        }
-
-                        var second = oldSeq.Dequeue();
-                        if (!IsSingleChar(second, '-'))
-                        {
-                            newSeq.Add(first);
-                            newSeq.Add(second);
-                            goto next;
-                        }
-                        
-                        var third = oldSeq.Dequeue();
-                        if (!IsSingleChar(third))
-                        {
-                            newSeq.Add(first);
-                            newSeq.Add(second);
-                            newSeq.Add(third);
-                            goto next;
-                        }
-
-                        var alpha = ((Node.Leaf<char>)first).Input.Inputs.Single();
-                        var omega = ((Node.Leaf<char>)third).Input.Inputs.Single();
-                        for (char ch = alpha; ch <= omega; ch++)
-                            newSeq.Add(new Node.Leaf<char>(new InputSet.CharSet(ch), ref nodePos));
-                        index += 2;
-
-                    next:
-                        index++;
+                        cur++;
+                        break;
                     }
-
-                    newSeq.AddRange(oldSeq);
-
-                    seq = null;
-                    foreach (var n in newSeq)
-                        seq = seq == null ? n : new Node.Seq<char>(seq, n);
+                    else if (ch == '\\')
+                    {
+                        inputSets.Add(ParseEscaped(str, cur, out cur, errors));
+                    }
+                    else if (ch == 0)
+                    {
+                        errors.Add(string.Format("unterminated [] set starting at {0}", start));
+                        goto done;
+                    }
+                    else
+                    {
+                        cur++;
+                        inputSets.Add(new InputSet.CharSet(ch));
+                    }
                 }
+            }
 
-                //
-                var inputs = seq.InLCROrder()
-                    .OfType<Node.Leaf<char>>()
-                    .Select(leaf => leaf.Input);
-                var combinedInputs = new InputSet.UnicodeCategorySet(inputs);
+            if (inputSets.Any())
+            {
+                var combinedInputSets = new InputSet.UnicodeCategorySet(inputSets);
 
                 if (negate)
-                    node = new Node.Fail<char>(combinedInputs, ref nodePos);
+                    node = new Node.Fail<char>(combinedInputSets, ref nodePos);
                 else
-                    node = new Node.Leaf<char>(combinedInputs, ref nodePos);
+                    node = new Node.Leaf<char>(combinedInputSets, ref nodePos);
             }
 
         done:
@@ -272,20 +239,42 @@ namespace Verophyle.Regexp
             return node;
         }
 
-        static bool IsSingleChar(Node.Node<char> node, char? ch = null)
+        static IInputSet<char> ParseCategoryRange(IEnumerable<char> str, int start, out int next, IList<string> errors)
         {
-            if (node.GetType() == typeof(Node.Leaf<char>))
+            IInputSet<char> inputSet = null;
+            int cur = start;
+            char first = str.ElementAtOrDefault(cur);
+            if (first == default(char) || first == '\\' || first == ']')
             {
-                var leaf = node as Node.Leaf<char>;
-                if (leaf.Input.InputCodes.Count == 1)
-                    return ch == null || leaf.Input.InputCodes.Single() == (int)ch.Value;
+                goto done;
             }
-            return false;
+
+            cur++;
+            char dash = str.ElementAtOrDefault(cur);
+            if (dash != '-')
+            {
+                goto done;
+            }
+
+            cur++;
+            char last = str.ElementAtOrDefault(cur);
+            if (last == default(char) || last == '\\' || last == ']')
+            {
+                goto done;
+            }
+
+            cur++;
+            inputSet = new InputSet.CharSet(Enumerable.Range(first, (last + 1) - first)
+                .Select(n => (char)n));
+
+        done:
+            next = inputSet != null ? cur : start;
+            return inputSet;
         }
 
-        static Node.Node<char> ParseEscaped(IEnumerable<char> str, int start, out int next, ref int nodePos, IList<string> errors)
+        static IInputSet<char> ParseEscaped(IEnumerable<char> str, int start, out int next, IList<string> errors)
         {
-            Node.Node<char> node = null;
+            IInputSet<char> inputSet = null;
             int cur = start;
 
             var slash = str.ElementAtOrDefault(cur);
@@ -302,49 +291,49 @@ namespace Verophyle.Regexp
                 case 's':
                 case 'w':
                 case 'd':
-                    node = new Node.Leaf<char>(new InputSet.UnicodeCategorySet(new[] { ch }), ref nodePos);
                     cur++;
+                    inputSet = new InputSet.UnicodeCategorySet(new[] { ch });
                     break;
                 case 'p':
                     cur++;
-                    node = ParseUnicodeCategory(str, cur, out cur, ref nodePos, errors);
+                    inputSet = ParseUnicodeCategory(str, cur, out cur, errors);
                     break;
                 case 'u':
                 case 'U':
                 case 'x':
                 case 'X':
                     cur++;
-                    node = ParseHexadecimal(str, cur, out cur, ref nodePos, errors);
+                    inputSet = ParseHexadecimal(str, cur, out cur, errors);
                     break;
                 case 'r':
                     cur++;
-                    node = new Node.Leaf<char>(new InputSet.CharSet('\r'), ref nodePos);
+                    inputSet = new InputSet.CharSet('\r');
                     break;
                 case 'n':
                     cur++;
-                    node = new Node.Leaf<char>(new InputSet.CharSet('\n'), ref nodePos);
+                    inputSet = new InputSet.CharSet('\n');
                     break;
                 case 't':
                     cur++;
-                    node = new Node.Leaf<char>(new InputSet.CharSet('\t'), ref nodePos);
+                    inputSet = new InputSet.CharSet('\t');
                     break;
                 case default(char):
                     errors.Add(string.Format("expected escaped character at index {0}", cur));
                     goto done;
                 default:
-                    node = new Node.Leaf<char>(new InputSet.CharSet(ch), ref nodePos);
                     cur++;
+                    inputSet = new InputSet.CharSet(ch);
                     break;
             }
 
         done:
-            next = node != null ? cur : start;
-            return node;
+            next = inputSet != null ? cur : start;
+            return inputSet;
         }
 
-        static Node.Node<char> ParseUnicodeCategory(IEnumerable<char> str, int start, out int next, ref int nodePos, IList<string> errors)
+        static IInputSet<char> ParseUnicodeCategory(IEnumerable<char> str, int start, out int next, IList<string> errors)
         {
-            Node.Node<char> node = null;
+            IInputSet<char> inputSet = null;
             int cur = start;
 
             var open = str.ElementAtOrDefault(cur);
@@ -384,8 +373,7 @@ namespace Verophyle.Regexp
             string name = sb.ToString();
             try
             {
-                var ucs = new InputSet.UnicodeCategorySet(name);
-                node = new Node.Leaf<char>(ucs, ref nodePos);
+                inputSet = new InputSet.UnicodeCategorySet(name);
             }
             catch (Exception e)
             {
@@ -394,13 +382,13 @@ namespace Verophyle.Regexp
             }
 
         done:
-            next = node != null ? cur : start;
-            return node;
+            next = inputSet != null ? cur : start;
+            return inputSet;
         }
 
-        static Node.Node<char> ParseHexadecimal(IEnumerable<char> str, int start, out int next, ref int nodePos, IList<string> errors)
+        static IInputSet<char> ParseHexadecimal(IEnumerable<char> str, int start, out int next, IList<string> errors)
         {
-            Node.Node<char> node = null;
+            IInputSet<char> inputSet = null;
             int cur = start;
 
             var open = str.ElementAtOrDefault(cur);
@@ -443,7 +431,7 @@ namespace Verophyle.Regexp
                     errors.Add(string.Format("hexadecimal character value exceeds 0xffff at index {0}", start));
                     goto done;
                 }
-                node = new Node.Leaf<char>(new InputSet.CharSet((char)code), ref nodePos);
+                inputSet = new InputSet.CharSet((char)code);
             }
             catch (Exception e)
             {
@@ -452,8 +440,8 @@ namespace Verophyle.Regexp
             }
 
         done:
-            next = node != null ? cur : start;
-            return node;
+            next = inputSet != null ? cur : start;
+            return inputSet;
         }
     }
 }

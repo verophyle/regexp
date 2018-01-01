@@ -90,5 +90,17 @@ namespace Verophyle.Regexp.Tests
             Assert.AreEqual(7, i);
             Assert.AreEqual(5, last);
         }
+
+        [TestMethod]
+        public void CharSet_IdentRegexp()
+        {
+            var re = new StringRegexp(@"_|_[_0-9a-zA-Z]+|[a-zA-Z][_0-9a-zA-Z]*");
+            Assert.IsTrue(re.Matches("_"));
+            Assert.IsTrue(re.Matches("_ab"));
+            Assert.IsTrue(re.Matches("_12"));
+            Assert.IsTrue(re.Matches("ab_cd"));
+            Assert.IsTrue(re.Matches("EF_GH"));
+            Assert.IsFalse(re.Matches("1_2"));
+        }
     }
 }
