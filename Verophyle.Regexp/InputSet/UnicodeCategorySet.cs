@@ -35,6 +35,7 @@ namespace Verophyle.Regexp.InputSet
                 case "s":
                     Categories = new HashSet<UnicodeCategory>
                     {
+                        UnicodeCategory.Control,
                         UnicodeCategory.SpaceSeparator,
                         UnicodeCategory.LineSeparator,
                         UnicodeCategory.ParagraphSeparator

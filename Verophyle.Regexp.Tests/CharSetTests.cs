@@ -102,5 +102,24 @@ namespace Verophyle.Regexp.Tests
             Assert.IsTrue(re.Matches("EF_GH"));
             Assert.IsFalse(re.Matches("1_2"));
         }
+
+        [TestMethod]
+        public void CharSet_Space()
+        {
+            var re = new StringRegexp(@"\s+");
+            Assert.IsTrue(re.Matches(" "));
+            Assert.IsTrue(re.Matches("\n\t"));
+            Assert.IsFalse(re.Matches(""));
+            Assert.IsFalse(re.Matches("abc"));
+        }
+
+        [TestMethod]
+        public void CharSet_NewLineTabCategory()
+        {
+            var re = new StringRegexp(@"[\t \n\r]+");
+            Assert.IsTrue(re.Matches(" \t\n\r"));
+            Assert.IsFalse(re.Matches(""));
+            Assert.IsFalse(re.Matches("abc"));
+        }
     }
 }

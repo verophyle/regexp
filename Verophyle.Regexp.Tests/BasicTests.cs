@@ -78,5 +78,12 @@ namespace Verophyle.Regexp.Tests
             Assert.IsFalse(re.Matches("abgh"));
             Assert.IsFalse(re.Matches(""));
         }
+
+        [TestMethod]
+        public void Basic_Unicode()
+        {
+            var re = new StringRegexp(@"\u{03b1}");
+            Assert.IsTrue(re.Matches("α"));
+        }
     }
 }

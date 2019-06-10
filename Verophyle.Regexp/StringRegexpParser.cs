@@ -16,6 +16,12 @@ namespace Verophyle.Regexp
 
             int nodePos = 0;
             var disj = ParseDisjunction(false, str, cur, out cur, ref nodePos, errors);
+            if (errors.Any())
+            {
+                next = start;
+                return null;
+            }
+
             if (disj != null)
             {
                 var end = new Node.End<char>(ref nodePos);
@@ -45,6 +51,12 @@ namespace Verophyle.Regexp
             while (true)
             {
                 var seq = ParseSequence(true, str, cur, out cur, ref nodePos, errors);
+                if (errors.Any())
+                {
+                    next = start;
+                    return null;
+                }
+
                 if (seq != null)
                 {
                     disj = disj == null ? seq : new Node.Disj<char>(disj, seq);
@@ -120,7 +132,9 @@ namespace Verophyle.Regexp
                 }
                 else if (ch == '\\')
                 {
-                    elem = new Node.Leaf<char>(ParseEscaped(str, cur, out cur, errors), ref nodePos);
+                    var input = ParseEscaped(str, cur, out cur, errors);
+                    if (input != null)
+                        elem = new Node.Leaf<char>(input, ref nodePos);
                 }
                 else if (ch == '.')
                 {
