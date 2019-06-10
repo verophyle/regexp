@@ -15,10 +15,11 @@
     <PackageProjectUrl>https://github.com/verophyle/regexp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/verophyle/regexp</RepositoryUrl>
     <PackageTags>regex dfa</PackageTags>
-    <AssemblyVersion>2.2.1.0</AssemblyVersion>
-    <FileVersion>2.2.1.0</FileVersion>
-    <Version>2.2.1</Version>
-    <PackageReleaseNotes>- 2.2.1: Fixed a bug in parsing character class ranges.
+    <AssemblyVersion>2.2.2.0</AssemblyVersion>
+    <FileVersion>2.2.2.0</FileVersion>
+    <Version>2.2.2</Version>
+    <PackageReleaseNotes>- 2.2.2: Fixed a couple of bugs in whitespace and unicode handling.
+- 2.2.1: Fixed a bug in parsing character class ranges.
 - 2.2.0: Fixed a bug in parsing escaped characters.
 - 2.0: Refactoring
 - 1.0: Initial version</PackageReleaseNotes>
