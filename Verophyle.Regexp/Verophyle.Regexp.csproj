@@ -1,23 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net472</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;net472</TargetFrameworks>
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>Verophyle.snk</AssemblyOriginatorKeyFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Authors>Gordon Tisher</Authors>
     <Company>Verophyle Informatics</Company>
     <Description>Simple DFA-based regular expressions for .NET.</Description>
     <Copyright>Copyright © Verophyle Informatics 2018</Copyright>
-    <PackageLicenseUrl>https://github.com/verophyle/regexp/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/verophyle/regexp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/verophyle/regexp</RepositoryUrl>
     <PackageTags>regex dfa</PackageTags>
-    <AssemblyVersion>2.2.2.0</AssemblyVersion>
-    <FileVersion>2.2.2.0</FileVersion>
-    <Version>2.2.2</Version>
+    <AssemblyVersion>2.2.3.0</AssemblyVersion>
+    <FileVersion>2.2.3.0</FileVersion>
+    <Version>2.2.3</Version>
     <PackageReleaseNotes>- 2.2.2: Fixed a couple of bugs in whitespace and unicode handling.
 - 2.2.1: Fixed a bug in parsing character class ranges.
 - 2.2.0: Fixed a bug in parsing escaped characters.
@@ -25,7 +23,7 @@
 - 1.0: Initial version</PackageReleaseNotes>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
